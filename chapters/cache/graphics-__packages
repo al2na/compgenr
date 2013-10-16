@@ -1,0 +1,9 @@
+BiocGenerics
+Biostrings
+GenomicRanges
+IRanges
+Rsamtools
+XVector
+base
+codetools
+knitr

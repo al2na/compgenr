@@ -1,0 +1,237 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass tufte-book
+\use_default_options true
+\begin_modules
+knitr
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<setup, include=FALSE, cache=FALSE>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+library(knitr)
+\end_layout
+
+\begin_layout Plain Layout
+
+options(replace.assign=TRUE,width=50)
+\end_layout
+
+\begin_layout Plain Layout
+
+opts_chunk$set(fig.path='figure/graphics-', cache.path='cache/graphics-',
+ fig.align='center', dev='pdf', fig.width=5, fig.height=5, fig.show='hold',
+ cache=TRUE, par=TRUE)
+\end_layout
+
+\begin_layout Plain Layout
+
+knit_hooks$set(par=function(before, options, envir){
+\end_layout
+
+\begin_layout Plain Layout
+
+if (before && options$fig.show!='none') par(mar=c(4,4,.1,.1),cex.lab=.95,cex.axis=.9,mg
+p=c(2,.7,0),tcl=-.3)
+\end_layout
+
+\begin_layout Plain Layout
+
+}, crop=hook_pdfcrop)
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+
+\end_layout
+
+\begin_layout Standard
+sdfsdfdsf
+\end_layout
+
+\begin_layout Standard
+sdfdsf
+\end_layout
+
+\begin_layout Standard
+Next, we will plot a scatter plot.
+ We will sample another set of 50 values and plotted those against the ones
+ we sampled earlier (Figure ).
+ Scatterplot shows values of two variables for a set of data points.
+ It is useful to visualize relationships between two variables.
+ The 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<scatter >>= 
+\end_layout
+
+\begin_layout Plain Layout
+
+# randomly sample 50 points from normal distribution 
+\end_layout
+
+\begin_layout Plain Layout
+
+y<-rnorm(50)  
+\end_layout
+
+\begin_layout Plain Layout
+
+x<-rnorm(50)
+\end_layout
+
+\begin_layout Plain Layout
+
+#plot a scatter plot 
+\end_layout
+
+\begin_layout Plain Layout
+
+plot(x,y,main="scatterplot of random samples")
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+we can also plot boxplots for vectors 
+\emph on
+x
+\emph default
+ and 
+\emph on
+y
+\emph default
+ (See Figure ).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+<<boxplot, eval=TRUE,fig.width=4,fig.height=4,tidy=FALSE>>=
+\end_layout
+
+\begin_layout Plain Layout
+
+boxplot(x,y,main="boxplots of random samples")  
+\end_layout
+
+\begin_layout Plain Layout
+
+@
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+fd
+\end_layout
+
+\begin_layout Standard
+fd
+\end_layout
+
+\end_body
+\end_document

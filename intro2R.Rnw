@@ -1,0 +1,302 @@
+\documentclass[nohyper,justified]{tufte-book}
+
+\usepackage[T1]{fontenc}
+
+\usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
+ breaklinks=true,pdfborder={0 0 1},backref=false,colorlinks=false]{hyperref}
+\hypersetup{
+ pdfstartview=FitH}
+\usepackage{breakurl}
+
+\title{R for Genomics}
+\author{Altuna Akalin}
+
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
+
+\begin{document}
+
+<<setup, include=FALSE, cache=FALSE>>=
+library(knitr)
+options(replace.assign=TRUE,width=50)
+opts_chunk$set(fig.path='figure/graphics-', cache.path='cache/graphics-', fig.align='center', dev='pdf', fig.width=5, fig.height=5, fig.show='hold', cache=TRUE, par=TRUE,
+               tidy.opts=list(keep.blank.line=TRUE, width.cutoff=40))
+knit_hooks$set(small.mar=function(before, options, envir){
+if (before && options$fig.show!='none') par(mar=c(3,2,3,.1),
+                                            cex.lab=1.5,cex.axis=1.5,
+                                            mgp=c(3,.7,0),tcl=-.3)
+}, crop=hook_pdfcrop)
+@
+
+\maketitle
+\tableofcontents
+\chapter{What can you do with R?}
+R is not only a powerful statistical programming language but also go-to data analysis
+tool for many computational genomics experts. Genomics usually produces high dimensional data sets that are suitable to be analyzed with core R packages and functions. On top of that, Bioconductor and CRAN have an array of specialized tools for doing genomics specific analysis.
+
+Here is a list of computational genomics tasks that can be completed using R.
+\section*{General data analysis and exploration}
+Most genomics data sets are suitable for application of general data analysis tools. In some cases, you may need to preprocess the data to get it to a state that is suitable for application such tools.
+\begin{itemize}
+  \item unsupervised data analysis: clustering (k-means, hierarchical), matrix factorization (PCA, ICA etc)
+    \item supervised data analysis: generalized linear models, support vector machines, randomForests
+\end{itemize}
+
+\section*{Visualization}
+Visualization is an important part of all data analysis techniques including computational genomics. Again, you can use core visualization technniques in R and also genomics specific ones with the help of specific packages.
+
+\begin{itemize}
+  \item Basic plots: Histograms, scatter plots, bar plots, box plots
+  \item ideograms and circus plots for genomics
+  \item heatmaps
+  \item meta-profiles of genomic features, read enrichment over all promoters
+  \item genomic track visualization for given locus
+\end{itemize}
+
+\section*{Dealing with genomic intervals}
+Most of the genomics data come in a tabular format that contains the location in the genome and some other relevant values, such as scores for those genomic features and/or names. R/Bioconductor has dedicated methods to deal with such data. Here are a couple of example tasks that you can achieve using R.
+\begin{itemize}
+  \item Overlapping CpG islands with transcription start sites, and filtering based on overlaps.
+  \item Aligning reads.
+  \item Overlapping aligned reads with exons and counting aligned reads per gene.
+
+\end{itemize}
+
+\section*{Application of other bioinformatics specific algorithms}
+In addition to genomic interval centered methods, R/Bioconductor gives you access to multitude of other bioinformatics specific algorithms. Here are some of the things you can do.
+\begin{itemize}
+  \item sequence analysis: TF binding motifs, GC content and CpG counts of a given DNA sequence
+  \item Differential expression (or arrays and sequencing based measurements)
+  \item Gene set/Pathway analysis: What kind of genes are enriched in my gene set. 
+\end{itemize}
+
+
+
+
+\chapter{Introduction to R}
+
+Here are some basic R operations and data structures that will be good to know if you do not have prior experience with R.
+
+\section{Computations in R}
+R can be used as an ordinary calculator. Here are a few examples:
+
+<<>>=
+2 + 3 * 5      # Note the order of operations.
+log(10)       # Natural logarithm with base e=2.718282
+4^2            # 4 raised to the second power
+3/2            # Division
+sqrt(16)      # Square root
+abs(3-7)      # Absolute value of 3-7
+pi             # The mysterious number
+exp(2)         # exponential function
+# This is a comment line 
+@
+
+\section{Vectors}
+R handles vectors easily and intuitively.
+
+<<>>=
+x<-c(1,3,2,10,5)    #create a vector x with 5 components
+x
+y<-1:5              #create a vector of consecutive integers
+y
+y+2                 #scalar addition
+2*y                 #scalar multiplication
+y^2                 #raise each component to the second power
+2^y                 #raise 2 to the first through fifth power
+y                   #y itself has not been unchanged
+y<-y*2
+y                   #it is now changed
+@
+
+\section{Matrices}
+A matrix refers to a numeric array of rows and columns. One of the easiest ways to create a matrix is to combine vectors of equal length using cbind(), meaning "column bind":
+
+<<>>=
+x<-c(1,2,3,4)
+y<-c(4,5,6,7)
+m1<-cbind(x,y);m1
+t(m1)                # transpose of m1
+dim(m1)              # 2 by 5 matrix
+@
+
+You can also directly list the elements and specify the matrix:
+<<>>=
+m2<-matrix(c(1,3,2,5,-1,2,2,3,9),nrow=3)
+m2
+@
+
+
+\section{Data Frames}
+A data frame is more general than a matrix, in that different columns can have different modes (numeric, character, factor, etc.). Small to moderate size data frame can be constructed by data.frame() function. For example, we illustrate how to construct a data frame from genomic intervals or coordinates.
+
+<<width.cutoff=40>>=
+chr <- c("chr1", "chr1", "chr2", "chr2")
+strand <- c("-","-","+","+")
+start<- c(200,4000,100,400)
+end<-c(250,410,200,450)
+mydata <- data.frame(chr,start,end,strand)
+
+#change column names
+names(mydata) <- c("chr","start","end","strand")  
+mydata
+# OR this will work too
+mydata <- data.frame(chr=chr,start=start,end=end,strand=strand)
+mydata
+@
+
+There are a variety of ways to extract the elements of a data frame .
+
+<<>>=
+mydata[,2:4] # columns 2,3,4 of data frame
+mydata[,c("chr","start")] # columns chr and Age from data frame
+mydata$start # variable start in the data frame 
+mydata[c(1,3),] # get 1st and 3rd rows
+@
+
+\section{Lists}
+An ordered collection of objects (components). A list allows you to gather a variety of (possibly unrelated) objects under one name. 
+
+<<>>=
+# example of a list with 4 components -
+# a string, a numeric vector, a matrix, and a scaler
+w <- list(name="Fred", 
+          mynumbers=c(1,2,3), 
+          mymatrix=matrix(1:4,ncol=2), 
+          age=5.3)
+w
+
+@
+
+You can extract elements of a list using the [[]] convention. 
+<<>>=
+w[[3]] # 3rd component of the list
+w[["mynumbers"]] # component named mynumbers in list
+@
+
+\section{Plotting}
+R has great support for plotting and customizing plots. We will show only a few below.
+Let us sample 50 values from normal distribution and plot them as a histogram. See the output at Figure \ref{mar:pdf-hist1}
+
+<<hist1, eval=FALSE,tidy=FALSE>>=
+# sample 50 values from normal distribution 
+# and store them in vector x
+x<-rnorm(50) 
+hist(x) # plot the histogram of those values
+@
+\begin{marginfigure}
+<<pdf-hist1, ref.label='hist1', dev='pdf', out.width='\\linewidth', echo=FALSE,small.mar=TRUE>>=
+@
+\caption{Histogram of 50 random values.\label{mar:pdf-hist1}}
+\end{marginfigure}
+
+We can modify all the plots by providing certain arguments to the plotting function. Now let's give a title to the plot using \texttt{'main'} argument. We can also change the color of the bars using  \texttt{'col'} argument. You can simply provide the name of the color. Below, we are using "red" for the color. See Figure \ref{mar:pdf-hist2} for the result this chunk.\\*
+
+<<hist2, eval=FALSE>>=
+hist(x,main="Hello histogram!!!",
+     col="red") 
+@
+
+
+\begin{marginfigure}
+<<pdf-hist2, ref.label='hist2', dev='pdf', out.width='\\linewidth', echo=FALSE,small.mar=TRUE>>=
+@
+\caption{Histogram with a title \label{mar:pdf-hist2}}
+\end{marginfigure}
+
+
+
+Next, we will plot a scatter plot. We sampled another set of 50 values and plotted those against the ones we sampled earlier.
+<<scatter,eval=TRUE,fig.width=5,fig.height=5,tidy=FALSE>>=
+# randomly sample 50 points from normal distribution
+y<-rnorm(50) 
+#plot a scatter plot
+plot(x,y,main="scatterplot of random samples")
+
+@
+
+We can also plot box plots for \texttt{x} and \texttt{y} vectors.
+<<boxplot, eval=TRUE,fig.width=5,fig.height=5,tidy=FALSE>>=
+
+boxplot(x,y,main="boxplots of random samples") 
+@
+
+\subsection{Saving plots}
+If you want to save your plots to an image file there are couple of ways of doing that. Normally, you will have to do the following:
+\begin{enumerate}
+  \item Open a graphics device
+  \item Create the plot
+  \item Close the graphics device
+\end{enumerate}
+
+<<eval=FALSE>>=
+pdf("mygraphs/myplot.pdf")
+plot(x,y)
+dev.off()
+@
+
+Alternatively, you can first create the plot then copy the plot to a graphical device.
+<<eval=FALSE>>=
+
+plot(x,y)
+dev.copy(pdf,"mygraphs/myplot.pdf")
+dev.off()
+@
+\section{Getting help on R functions/commands}
+Most R functions have great documentation on how to use them. Try \texttt{?} and \texttt{??}. \texttt{?} will pull the documentation on the functions and \texttt{??} will find help pages on a vague topic. Try on R terminal:
+\\
+\texttt{?hist}
+\\
+\texttt{??histogram}
+
+
+\section{Short introduction for Genomics and R}
+R and Bioconductor has many packages that will help analyze genomics data. Some of the most popular ones are GenomicRanges, IRanges, Rsamtools and BSgenome. Next subsections will show how to use R and bioconductor to read-in and manipulate genomic intervals. Knowing more about R and Bioconductor packages will be useful if you want to customize or enhance your data analysis.
+
+\subsection{Reading the genomics data}
+Most of the genomics data are in the form of genomic intervals associated with a score. That means mostly the data will be in table format with columns denoting chromosome, start positions, end positions, strand and score. One of the popular formats is BED format used primarily by UCSC genome browser but most other genome browsers and tools will support BED format. We have all the annotation data in BED format. In R, you can easily read tabular format data with read.table() function. 
+<< tidy=FALSE>>=
+# read enhancer marker BED file
+enh.df=read.table("data/subset.enhancers.bed",header=FALSE) 
+# read CpG island BED file
+cpgi.df=read.table("data/subset.cpgi.hg18.bed",header=FALSE) 
+
+# check first lrows to see how the data looks like
+head(enh.df) 
+head(cpgi.df)
+
+# get CpG islands on chr21
+head( cpgi.df[cpgi.df$V1=="chr21",] )
+@
+
+\subsection{Using GenomicRanges package for operations on genomic intervals}
+One of the most useful operations when working with genomic intervals is the overlap operation. For example, we may want to know how many of enhancers overlap with CpG islands or how many of the binding sites overlap with promoters, etc. Unfortunately, basic R functions are not designed to deal with such problems, however bioconductor packages: IRanges and GenomicRanges provide efficient ways to handle genomic interval data and provide many functions for operating on genomic intervals. Below, we will show how to convert your data to GenomicRanges objects/data structures and do overlap between enhancers and CpG islands.
+
+<<tidy=FALSE,message=FALSE>>=
+# covert enhancer data frame to GenomicRanges object
+library(GenomicRanges) # load the package
+
+enh <- GRanges(seqnames=enh.df$V1,
+               ranges=IRanges(start=enh.df$V2,end=enh.df$V3)  
+               )
+
+cpgi = GRanges(seqnames=cpgi.df$V1,
+               ranges=IRanges(start=cpgi.df$V2,end=cpgi.df$V3),
+               ids=cpgi.df$V4  
+               )
+# find enhancers overlapping with CpG islands
+cpg.enh=subsetByOverlaps(enh, cpgi)
+# number of enhancers overlapping with CpG islands
+length(cpg.enh)
+# number of all enhancers in the set
+length(enh)
+# plot histogram of lenths of CpG islands
+hist(width(cpgi) )
+@
+
+
+\end{document}

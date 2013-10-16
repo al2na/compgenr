@@ -1,0 +1,9 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+dfsdddssf
+
+
+\end{document}
