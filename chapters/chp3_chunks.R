@@ -1,5 +1,4 @@
 
-
 ## ---- createGR ----
 library(GenomicRanges)
 gr=GRanges(seqnames=c("chr1","chr2","chr2"),
@@ -58,7 +57,9 @@ tss.gr=ref.gr
 end(tss.gr[strand(tss.gr)=="+",])  =start(tss.gr[strand(tss.gr)=="+",])
 # startof the - strand genes must be equalized to end pos
 start(tss.gr[strand(tss.gr)=="-",])=end(tss.gr[strand(tss.gr)=="-",])
-
+# remove duplicated TSSes ie alternative transcripts
+# this keeps the first instance and removes duplicates
+tss.gr=tss.gr[!duplicated(tss.gr),])
 
 ## ---- findTSSwithCpGi ----
 subsetByOverlaps(tss.gr,cpgi.gr)
@@ -78,9 +79,13 @@ n.ind=nearest(tss.gr,cpgi.gr)
 dists=distanceToNearest(tss.gr,cpgi.gr,select="arbitrary")
 dists
 
-# plot the distances to nearest
-hist(as.matrix(dists)[,3])
-## ---- findCanonnical ----
+# histogram of the distances to nearest TSS
+dist2plot=mcols(dists)[,1]
+hist(log10(dist2plot),xlab="log10(dist to nearest TSS)",
+     main="Distances")
+
+
+## ---- findCanonical ----
   
 
 

@@ -521,7 +521,7 @@ status open
 
 \begin_layout Plain Layout
 
-<<findCanonnical>>=
+<<findCanonical>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -555,6 +555,10 @@ status open
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+sdsd
 \end_layout
 
 \begin_layout Section

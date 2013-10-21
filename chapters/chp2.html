@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<p>@path/Users/altuna/Dropbox/PAPERS/R-devel/compgenr/chapters//</p>
+<h1 id="quick-introduction-to-r">Quick introduction to R</h1>
+<p>R is a free statistical programming language that is popular among researchers and data miners to build software and analyze data<sup><a href="#fn1" class="footnoteRef" id="fnref1">1</a></sup>. In next sections, we will first get you started with the setup of environment for using R and then introduce some basic R operations and data structures that will be good to know if you do not have prior experience with R. If you need more in depth R introduction you will want to check out some beginner level books and online tutorials. This website has a bunch of resources listed: <a href="http://www.introductoryr.co.uk/R_Resources_for_Beginners.html">http://www.introductoryr.co.uk/R_Resources_for_Beginners.html</a></p>
+<h2 id="the-setup">The setup</h2>
+<p>Download and install R <a href="http://cran.r-project.org/">http://cran.r-project.org/</a> and RStudio <a href="http://www.rstudio.com/">http://www.rstudio.com/</a> if you do not have them already. Rstudio is optional but it is a great tool if you are just starting to learn R. You will need specific data sets to run the codes in this document. Download the data.zip[URL to come] and extract it to your directory of choice. The folder name should be “data” and your R working directory should be level above the data folder. That means in your R console, when you type “<em>dir(“data”)</em>” you should be able to see the contents of the data folder. You can change your working directory by <em>setwd()</em> command and get your current working directory with <em>getwd()</em> command in R<sup><a href="#fn2" class="footnoteRef" id="fnref2">2</a></sup>. In RStudio, you can click on the top menu and change the location of your working directory via user interface.</p>
+<h3 id="installing-packages">Installing packages</h3>
+<p>R packages are add-ons to base R that help you achieve additional tasks that are not directly supported by base R. It is by the action of these extra functionality that R excels as a tool for computational genomics. Bioconductor project (<a href="http://bioconductor.org/">http://bioconductor.org/</a>) is a dedicated package repository for computational biology related packages. However main package repository of R, called CRAN, has also computational biology related packages. In addition, R-Forge(<a href="http://r-forge.r-project.org/">http://r-forge.r-project.org/</a>), GitHub(<a href="https://github.com/">https://github.com/</a>), and googlecode(<a href="http://code.google.com">http://code.google.com</a>) are other locations where R packages might be hosted.</p>
+<p>You can install CRAN packages using install.packages(). (# is the comment character in R)</p>
+<p><br /></p>
+<p>You can install packages from bioconductor with their specific installer script.</p>
+<p><br /><br /><br /></p>
+<p>Installing packages from GitHub via install_github function from devtools package.</p>
+<p><br /></p>
+<p>You can install packages from the source files, that usually have .tar.gz suffix.</p>
+<p><br /><br /><code>               </code><br /><br /><br /><code>                 </code><br /><br /></p>
+<p>You can also update installed packages from CRAN and Bioconductor.</p>
+<p><br /><br /><br /><br /></p>
+<h3 id="installing-packages-in-custom-locations">installing packages in custom locations</h3>
+<p>If you will be using R on servers or computing clusters rather than your personal computer it is unlikey that you will have administrator access to install packages. In that case, you can install packges in custom locations by telling R where to look for additional packages. This is done by setting up an <em>.Renviron</em> file in your home directory and add the following line:</p>
+<pre><code>R_LIBS=~/Rlibs</code></pre>
+<p>This tells R that “Rlibs” directory at your home directory will be the first choice of locations to look for packages and install packages (The directory name and location is up to you above is just an example). You should go and create that directory now. After that, start a fresh R session and start installing packages. From now on, packages will be installed to your local directory where you have read-write access.</p>
+<h3 id="getting-help-on-r-functions-and-packages">Getting help on R functions and packages</h3>
+<p>You can get help on functions by help() and help.search() functions. You can list the functions in a package with ls() function</p>
+<p><br /><code>  </code><br /><code>  </code><br /><br /><br /><br /><br /><br /></p>
+<p>In addition, check for help and practical understanding of the functions. All Bionconductor packages have vignettes that walk you thorugh example analysis. will always be helpful as well, there are many blogs and web pages that have posts about R.</p>
+<h2 id="computations-in-r">Computations in R</h2>
+<p>R can be used as an ordinary calculator. Here are a few examples:</p>
+<p><code>      </code></p>
+<pre><code>## [1] 17</code></pre>
+<p><code>  </code></p>
+<pre><code>## [1] 2.303</code></pre>
+<p><code>  </code></p>
+<pre><code>## [1] 25</code></pre>
+<p><code>  </code></p>
+<pre><code>## [1] 1.5</code></pre>
+<p><code>  </code></p>
+<pre><code>## [1] 4</code></pre>
+<p><code>    </code></p>
+<pre><code>## [1] 4</code></pre>
+<p><code>  </code></p>
+<pre><code>## [1] 3.142</code></pre>
+<p><code>  </code></p>
+<pre><code>## [1] 7.389</code></pre>
+<p><code># This is a comment line</code></p>
+<h2 id="vectors">Vectors</h2>
+<p>Vectors is one the core R data structures. R handles vectors easily and intuitively. You can create vectors with <em>c()</em> function, however that is not the only way. The operations on vectors will propagate to all the elements of the vectors.</p>
+<p><code>        </code><br /></p>
+<pre><code>## [1]  1  3  2 10  5</code></pre>
+<p><code>    </code><br /><code>    </code></p>
+<pre><code>## [1] 3 4 5 6 7</code></pre>
+<p><code>    </code></p>
+<pre><code>## [1]  2  4  6  8 10</code></pre>
+<p><code>  </code></p>
+<pre><code>## [1]  1  4  9 16 25</code></pre>
+<p><code>  </code></p>
+<pre><code>## [1]  2  4  8 16 32</code></pre>
+<p><code>  </code></p>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<p><code>    </code><br /><code>  </code></p>
+<pre><code>## [1]  2  4  6  8 10</code></pre>
+<p><code>     </code><br /><code>  </code></p>
+<pre><code>## [1] 3</code></pre>
+<p><code>  </code></p>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<p><code>    </code></p>
+<h3 id="data-types-in-r">Data types in R</h3>
+<p>There are four comon data types in R, they are numeric, logical and character and integer. All these data types can be used to create vectors natively.</p>
+<p><br /><code>      </code><br /></p>
+<pre><code>## [1]  1  3  2 10  5</code></pre>
+<p><br /><code>    </code><br /></p>
+<pre><code>## [1]  TRUE FALSE  TRUE</code></pre>
+<p><br /><code>    </code><br /></p>
+<pre><code>## [1] &quot;sds&quot; &quot;sd&quot;  &quot;as&quot;</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p><br /><code>    </code><br /></p>
+<pre><code>## [1] 1 2 3</code></pre>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<h2 id="matrices">Matrices</h2>
+<p>A matrix refers to a numeric array of rows and columns. You can think of it as a stacked version of vectors where each row or column is a vector. One of the easiest ways to create a matrix is to combine vectors of equal length using <em>cbind()</em>, meaning ’column bind’</p>
+<p><code>     </code><br /><code>     </code><br /><code>  </code><br /></p>
+<pre><code>##      x y
+## [1,] 1 4
+## [2,] 2 5
+## [3,] 3 6
+## [4,] 4 7</code></pre>
+<p><code>  </code></p>
+<pre><code>##   [,1] [,2] [,3] [,4]
+## x    1    2    3    4
+## y    4    5    6    7</code></pre>
+<p><code>  </code></p>
+<pre><code>## [1] 4 2</code></pre>
+<p>You can also directly list the elements and specify the matrix:</p>
+<p><code>             </code><br /></p>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    5    2
+## [2,]    3   -1    3
+## [3,]    2    2    9</code></pre>
+<h2 id="data-frames">Data Frames</h2>
+<p>A data frame is more general than a matrix, in that different columns can have different modes (numeric, character, factor, etc.). A data frame can be constructed by <em>data.frame()</em> function. For example, we illustrate how to construct a data frame from genomic intervals or coordinates.</p>
+<p><code>     </code><br /><code>     </code><br /><code>     </code><br /><code>     </code><br /><code>  </code><br /><br /><code>     </code><br /><code>  </code></p>
+<pre><code>##    chr start end strand
+## 1 chr1   200 250      -
+## 2 chr1  4000 410      -
+## 3 chr2   100 200      +
+## 4 chr2   400 450      +</code></pre>
+<p><code>       </code><br /><code>     </code><br /></p>
+<pre><code>##    chr start end strand
+## 1 chr1   200 250      -
+## 2 chr1  4000 410      -
+## 3 chr2   100 200      +
+## 4 chr2   400 450      +</code></pre>
+<p>There are a variety of ways to extract the elements of a data frame. You can extract certain columns using column numbers or names, or you can extract certain rows by using row numbers. You can also extract data using logical arguments, such as extracting all rows that has a value in a column larger than your threshold.</p>
+<p><code>   </code></p>
+<pre><code>##   start end strand
+## 1   200 250      -
+## 2  4000 410      -
+## 3   100 200      +
+## 4   400 450      +</code></pre>
+<p><code>    </code></p>
+<pre><code>##    chr start
+## 1 chr1   200
+## 2 chr1  4000
+## 3 chr2   100
+## 4 chr2   400</code></pre>
+<p><code>  </code></p>
+<pre><code>## [1]  200 4000  100  400</code></pre>
+<p><code>   </code></p>
+<pre><code>##    chr start end strand
+## 1 chr1   200 250      -
+## 3 chr2   100 200      +</code></pre>
+<p><code>    </code></p>
+<pre><code>##    chr start end strand
+## 2 chr1  4000 410      -</code></pre>
+<h2 id="lists">Lists</h2>
+<p>An ordered collection of objects (components). A list allows you to gather a variety of (possibly unrelated) objects under one name.</p>
+<p><br /><br /><code>  </code><br /><code>       </code><br /><code>       </code><br /><code>       </code><br /></p>
+<pre><code>## $name
+## [1] &quot;Fred&quot;
+## 
+## $mynumbers
+## [1] 1 2 3
+## 
+## $mymatrix
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+## 
+## $age
+## [1] 5.3</code></pre>
+<p>You can extract elements of a list using the [[]] convention using either its position in the list or its name.</p>
+<p><code>  </code></p>
+<pre><code>##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4</code></pre>
+<p><code>  </code></p>
+<pre><code>## [1] 1 2 3</code></pre>
+<h2 id="factors">Factors</h2>
+<p>Factors are used to store categorical data. They are important for statistical modeling since categorical variables are treated differently in statistical models than continuos variables. This ensures categorical data treated accordingly in statistical models.</p>
+<p><code>    </code><br /><code>  </code></p>
+<p>Important thing to note is that when you are reading a data.frame with read.table() or creating a data frame with data.frame() character columns are stored as factors by default, to change this behaviour you need to set <em>stringsAsFactors=FALSE</em> in read.table() and/or data.frame() function arguments.</p>
+<h2 id="readingwriting-data">Reading/Writing data </h2>
+<p>Most of the genomics data are in the form of genomic intervals associated with a score. That means mostly the data will be in table format with columns denoting chromosome, start positions, end positions, strand and score. One of the popular formats is BED format used primarily by UCSC genome browser but most other genome browsers and tools will support BED format. We have all the annotation data in BED format. In R, you can easily read tabular format data with <em>read.table()</em> function.</p>
+<p><code>  </code><br /><code>        </code><br /><code>  </code><br /><code>        </code><br /><br /></p>
+<pre><code>##      V1     V2     V3 V4   V5 V6    V7    V8 V9
+## 1 chr20 266275 267925  . 1000  .  9.11 13.17 -1
+## 2 chr20 287400 294500  . 1000  . 10.53 13.02 -1
+## 3 chr20 300500 302500  . 1000  .  9.10 13.39 -1
+## 4 chr20 330400 331800  . 1000  .  6.39 13.51 -1
+## 5 chr20 341425 343400  . 1000  .  6.20 12.99 -1
+## 6 chr20 437975 439900  . 1000  .  6.31 13.52 -1</code></pre>
+<pre><code>##      V1     V2     V3       V4
+## 1 chr20 195575 195851  CpG:_28
+## 2 chr20 207789 208148  CpG:_32
+## 3 chr20 219055 219437  CpG:_33
+## 4 chr20 225831 227155 CpG:_135
+## 5 chr20 252826 256323 CpG:_286
+## 6 chr20 275376 276977 CpG:_116</code></pre>
+<p>You can save your data by writing it to disk as a text file. A data frame or matrix can be written out by using <em>write.table()</em> function. Now let us write out cpgi.df, we will write it out as a tab-separated file, pay attention to the arguments.</p>
+<p><code>      </code><br /><code>            </code></p>
+<p>You can save your R objects directly into a file using <em>save()</em> and <em>saveRDS() </em>and load them back in with load() and readRDS(). By using these functions you can save any R object whether or not they are in data frame or matrix classes.</p>
+<p><code>   </code><br /><br /><br /><code>   </code><br /><code>  </code><br /></p>
+<p>One important thing is that with save() you can save many objects at a time and when they are loaded into memory with load() they retain their variable names. For example, in the above code when you use load(mydata.RData) in a fresh R session, an object names “cpg.df” will be created. That means you have to figure out what name you gave it to the objects before saving them. On the contrary to that, when you save an object by saveRDS() and read by readRDS() the name of the object is not retained, you need to assign the output of readRDS() to a new variable (“x” in the above code chunk).</p>
+<h2 id="plotting-in-r">Plotting in R</h2>
+<p>R has great support for plotting and customizing plots. We will show only a few below. Let us sample 50 values from normal distribution and plot them as a histogram (See Figure[mar:hist1]).</p>
+<p><br /><br /><br /><code> </code></p>
+<p><img src="figure/graphics-pdf-hist1" alt="image" /></p>
+<p>We can modify all the plots by providing certain arguments to the plotting function. Now let’s give a title to the plot using <em>’main’</em> argument. We can also change the color of the bars using <em>’col’</em> argument. You can simply provide the name of the color. Below, we are using ’<em>red</em>’ for the color. See Figure [mar:hist<sub>t</sub>itle] for the result this chunk.</p>
+<p><code>      </code></p>
+<p><img src="figure/graphics-pdf-hist2" alt="image" /></p>
+<p>Next, we will plot a scatter plot. Scatter plots are one os the most common plots you will encounter in data analysis. We will sample another set of 50 values and plotted those against the ones we sampled earlier. Scatterplot shows values of two variables for a set of data points. It is useful to visualize relationships between two variables. It is frequently used in connection with correlation and linear regression. There are other variants of scatter plots which show density of the points with different colors. We will show examples of those that in following chapters. The scatter plot from our sampling experiment is shown in Figure [fig:scatter-plot-of]. Notice that, in addition to main we used “xlab” and “ylab” arguments to give labels to the plot. You can customize the plots even more than this. See ?plot and ?par for more arguments that can help you customize the plots.</p>
+<p><br /><br /><br /><br /><br /><code>        </code></p>
+<p><img src="figure/graphics-scatter" alt="image" /></p>
+<p>we can also plot boxplots for vectors <em>x</em> and <em>y.</em> Boxplots depict groups of numerical data through their quartiles. The edges of the box denote 1st and 3rd quartile, and the line that crosses the box is the median. Whiskers usually are defined using interquantile range,<span class="math"><em>l</em><em>o</em><em>w</em><em>e</em><em>r</em><em>W</em><em>h</em><em>i</em><em>s</em><em>k</em><em>e</em><em>r</em> = <em>Q</em>1 − 1. 5 * <em>I</em><em>Q</em><em>R</em></span> and <span class="math"><em>u</em><em>p</em><em>p</em><em>e</em><em>r</em><em>W</em><em>h</em><em>i</em><em>s</em><em>k</em><em>e</em><em>r</em> = <em>Q</em>1 + 1. 5 * <em>I</em><em>Q</em><em>R</em></span>. In addition outliers can be depicted as dots. In this case, outliers are the values that remain outside the whiskers.</p>
+<p><img src="figure/graphics-boxplot" alt="image" /></p>
+<p>Next up is bar plot which you can plot by barplot() function. We are going to plot four imaginary percentage values and color them with two colors, and this time we will also show how to draw a legend on the plot using legend() function.</p>
+<p><br /><br /><code>        </code><br /><code>        </code><br /></p>
+<p><img src="figure/graphics-barplot" alt="image" /></p>
+<h3 id="saving-plots">Saving Plots</h3>
+<p>If you want to save your plots to an image file there are couple of ways of doing that. Normally, you will have to do the following:</p>
+<ol>
+<li><p>Open a graphics device</p></li>
+<li><p>Create the plot</p></li>
+<li><p>Close the graphics device</p></li>
+</ol>
+<p><code>      </code><br /><br /></p>
+<p>Alternatively, you can first create the plot then copy the plot to a graphical device.</p>
+<p><br /><code>       </code><br /></p>
+<h2 id="user-defined-functions">User defined functions</h2>
+<p>Functions are useful for transforming larger chunks of code to re-usable pieces of code. Generally, if you need to execute certain tasks with variable parameters then it is time you write a function. A function in R takes different arguments and returns a definite output, much like mathematical functions. Here is a simple function takes two arguments, x and y, and returns the sum of their squares.</p>
+<p><code>   </code><br /><code>        </code><br /><code>    </code><br /><br /><br /><code> </code></p>
+<pre><code>## [1] 13</code></pre>
+<p>Functions can also output plots and/or messages to the terminal. Here is a function that prints a message to the terminal:</p>
+<p><code>   </code><br /><code>        </code><br /><code>     </code><br /><br /><br /><code> </code></p>
+<pre><code>## here is the result: 13</code></pre>
+<h2 id="if-else-control-structures">if-else control structures</h2>
+<p>Sometimes we would want to execute a certain part of the code only if certain condition is satisfied. This condition can be anything from the type of an object (Ex: if object is a matrix execute certain code), or it can be more compicated such as if object value is between certain thresholds. Let us see how they can be used<sup><a href="#fn3" class="footnoteRef" id="fnref3">3</a></sup>. They can be used anywhere in your code, now we will use it in a function.</p>
+<p><br /><code>  </code><br /><code>          </code><br /><code>       </code><br /><code>        </code><br /><code>            </code><br /><code>        </code><br /><code>      </code><br /><code>        </code><br /><code>    </code><br /><br /><br /><br /></p>
+<h2 id="loops-and-looping-structures-in-r">Loops and looping structures in R</h2>
+<p>When you need to repeat a certain task or a execute a function multiple times, you can do that with the help of loops. A loop will execute the task until a certain condition is reached. The loop below is called a “for-loop” and it executes the task sequentially 10 times.</p>
+<p><code>   </code><br /><code>    </code><br /><code>      </code><br /><code>    </code><br /></p>
+<pre><code>## This is iteration[1] 1
+## This is iteration[1] 2
+## This is iteration[1] 3
+## This is iteration[1] 4
+## This is iteration[1] 5
+## This is iteration[1] 6
+## This is iteration[1] 7
+## This is iteration[1] 8
+## This is iteration[1] 9
+## This is iteration[1] 10</code></pre>
+<p>The task above is a bit pointless, normally in a loop, you would want to do something meaningful. Let us calculate the length of the CpG islands we read in earlier. Although this is not the most efficient way of doing that particular task, it serves as a good example for looping. The code below will be execute hundred times, and it will calculate the length of the CpG islands for the first 100 islands in the data frame (by subtracting the end coordinate from the start coordinate) <sup><a href="#fn4" class="footnoteRef" id="fnref4">4</a></sup>.</p>
+<p><br /><br /><code>  </code><br /><br /><code>   </code><br /><code>    </code><br /><code>            </code><br /><code>    </code><br /><code>      </code><br /><br /><br /></p>
+<pre><code>## [1]  277  360  383 1325 3498 1602</code></pre>
+<h3 id="apply-family-functions-instead-of-loops">apply family functions instead of loops</h3>
+<p>R has other ways of repeating tasks that tend to be more efficient than using loops. They are known as the <em>“apply”</em> family of functions, which include <em>apply,lapply, mapply and tapply</em> (and some other variants)<em>.</em> All of these functions apply a given function to a set of instances and returns the result of those functions for each instance. The differences between them is that they take different type of inputs. For example apply works on data frames or matrices and applies the function on each row or column of the data structure. lapply works on lists or vectors and applies a function which takes the list element as an argument. Next we will demonstrate how to use apply() on a matrix. The example applies the sum function on the rows of a matrix, it basically sums up the values on each row of the matrix, which is conceptualized in Figure [mar:apply-on-a-matrix]</p>
+<div class="figure">
+<embed src="1_Users_altuna_Dropbox_PAPERS_R-devel_compgenr_chapters_nonR_figures_apply.pdf" /><p class="caption">apply on rows[mar:apply-on-a-matrix]</p>
+</div>
+<p><code>           </code><br /><code>                </code><br /><code>    </code><br /><code>   </code><br /></p>
+<pre><code>## [1] 12  3  5  6</code></pre>
+<p><br /><br /><code>     </code><br /></p>
+<pre><code>## [1] 12  3  5  6</code></pre>
+<p>Notice that we used a second argument which equals to 1, that indicates that rows of the matrix/ data frame will be the input for the function. If we change the second argument to 2, this will indicate that columns should be the input for the function that will be applied. See Figure [mar:apply-on-columns] for the visualization of apply() on columns.</p>
+<p><code>   </code><br /></p>
+<pre><code>## [1] 9 3 6 2 3 3</code></pre>
+<div class="figure">
+<embed src="2_Users_altuna_Dropbox_PAPERS_R-devel_compgenr_chapters_nonR_figures_apply2.pdf" /><p class="caption">apply on columns[mar:apply-on-columns]</p>
+</div>
+<p>next we will use lapply, which applies a function on a list or a vector. The function that will be applied is a simple function that takes the square of a given number.</p>
+<p><code>    </code><br /><code> </code></p>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 4
+## 
+## [[3]]
+## [1] 9</code></pre>
+<p>mapply is another member of apply family, it can apply a function on an unlimited set of vectors/lists, it is like a version of lapply that can handle multiple vectors as arguments. In this case, the argument to the mapply() is the function to be applied and the sets of parameters to be supplied as arguments of the function. This conceptualized Figure [mar:mapply-takes-in], the function to be applied is a function that takes to arguments and sums them up. The arguments to be summed up are in the format of vectors, Xs and Ys. mapply() applies the summation function to each pair in Xs and Ys vector. Notice that the order of the input function and extra arguments are different for mapply.</p>
+<p><code>  </code><br /><code>       </code><br /><code>    </code><br /></p>
+<pre><code>## [1] 2 3 4 6 7 8</code></pre>
+<div class="figure">
+<embed src="3_Users_altuna_Dropbox_PAPERS_R-devel_compgenr_chapters_nonR_figures_mapply.pdf" /><p class="caption">mapply takes in multiple/vectors and lists[mar:mapply-takes-in]</p>
+</div>
+<h3 id="apply-family-functions-on-multiple-cores">apply family functions on multiple cores</h3>
+<p>If you have large data sets apply-family functions can be slow (although probably still better than for loops). If that is the case, you can easily use the parallel versions of those functions from parallel package. These functions essentially divide your tasks to smaller chunks run them on separate CPUs and merge the results from those parallel operations. This concept is visualized at Figure [mar:mcmapply-on-3], mcapply runs the summation function on three different processors. Each processor executes the summation function on a part of the data set, and the results are merged and returned as a single vector that has the same order as the input parameters Xs and Ys.</p>
+<div class="figure">
+<embed src="4_Users_altuna_Dropbox_PAPERS_R-devel_compgenr_chapters_nonR_figures_mcmapply.pdf" /><p class="caption">mcmapply on 3 cores[mar:mcmapply-on-3]</p>
+</div>
+<h3 id="vectorized-functions-in-r">Vectorized functions in R</h3>
+<p>The above examples have been put forward to illustrate functions and loops in R because functions using sum() are not complicated and easy to understand. You will probably need to use loops and looping structures with more complicated functions. In reality, most of the operations we used do not need the use of loops or looping structures because there are already vectorized functions that can achieve the same outcomes, meaning if the input arguments are R vectors the output will be a vector as well, so no need for loops or vectorization.</p>
+<p>For example, instead of using mapply() and sum() functions we can just use + operator and sum up Xs and Ys.</p>
+<p><code>    </code><br /></p>
+<pre><code>## [1] 2 3 4 6 7 8</code></pre>
+<p>In order to get the column or row sums, we can use the vectorized functions colSums() and rowSums()</p>
+<pre><code>## [1] 9 3 6 2 3 3</code></pre>
+<pre><code>## [1] 12  3  5  6</code></pre>
+<p>However, remember that not every function is vectorized in R, use the ones that are. But sooner or later, apply family functions will come in handy.</p>
+<h2 id="session-info">Session Info</h2>
+<pre><code>## R version 3.0.2 (2013-09-25)
+## Platform: x86_64-apple-darwin10.8.0 (64-bit)
+## 
+## locale:
+## [1] C
+## 
+## attached base packages:
+## [1] parallel  methods   stats     graphics 
+## [5] grDevices utils     datasets  base     
+## 
+## other attached packages:
+## [1] codetools_0.2-8       Rsamtools_1.13.49    
+## [3] GenomicRanges_1.13.51 Biostrings_2.29.19   
+## [5] XVector_0.1.4         IRanges_1.19.38      
+## [7] BiocGenerics_0.7.5    knitr_1.5            
+## 
+## loaded via a namespace (and not attached):
+## [1] bitops_1.0-6   digest_0.6.3   evaluate_0.5  
+## [4] formatR_0.9    highr_0.2.1    stats4_3.0.2  
+## [7] stringr_0.6.2  tools_3.0.2    zlibbioc_1.7.0</code></pre>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>Chapter is initiated by Altuna Akalin.</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>if you want to know more about details about R and its history here is a good place to start <a href="http://en.wikipedia.org/wiki/R_(programming_language)">http://en.wikipedia.org/wiki/R_(programming_language)</a><a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>dir() gives you files in your current working directory. getwd() gets current directory. You may need these at some point.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>see ?Control for more<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>If you are going to run a loop that has a lot of repetitions, it is smart to try the loop with few repetitions first and check the results. This will help you make sure the code in the loop works before executing it for thousands of times.<a href="#fnref4">↩</a></p></li>
+</ol>
+</div>
+</body>
+</html>
