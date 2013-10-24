@@ -27,7 +27,7 @@ gr=GRanges(seqnames=c("chr1","chr2","chr2"),
 )
 
 # or appends to existing meta data
-elementMetadata(gr)=cbind(mcols(gr),
+mcols(gr)=cbind(mcols(gr),
                           DataFrame(name2=c("pax6","meis1","zic4")) )
 gr
 # elementMetadata() and values() do the same things
@@ -36,7 +36,7 @@ values(gr)
 
 ## ---- convertDataframe2gr ----
 # read CpGi data set
-cpgi.df = read.table("data/subset.cpgi.hg18.bed", header = FALSE,
+cpgi.df = read.table("data/cpgi.hg19.chr21.bed", header = FALSE,
                      stringsAsFactors=FALSE) 
 # remove chr names with "_"
 cpgi.df =cpgi.df [grep("_",cpgi.df[,1],invert=TRUE),]
@@ -45,7 +45,7 @@ cpgi.gr=GRanges(seqnames=cpgi.df[,1],
                 ranges=IRanges(start=cpgi.df[,2],
                               end=cpgi.df[,3]))
 # read refseq file
-ref.df = read.table("data/subset.refseq.hg18.bed", header = FALSE,
+ref.df = read.table("data/refseq.hg19.chr21.bed", header = FALSE,
                      stringsAsFactors=FALSE) 
 ref.gr=GRanges(seqnames=ref.df[,1],
                ranges=IRanges(start=ref.df[,2],
@@ -59,7 +59,7 @@ end(tss.gr[strand(tss.gr)=="+",])  =start(tss.gr[strand(tss.gr)=="+",])
 start(tss.gr[strand(tss.gr)=="-",])=end(tss.gr[strand(tss.gr)=="-",])
 # remove duplicated TSSes ie alternative transcripts
 # this keeps the first instance and removes duplicates
-tss.gr=tss.gr[!duplicated(tss.gr),])
+tss.gr=tss.gr[!duplicated(tss.gr),]
 
 ## ---- findTSSwithCpGi ----
 subsetByOverlaps(tss.gr,cpgi.gr)
@@ -90,3 +90,31 @@ hist(log10(dist2plot),xlab="log10(dist to nearest TSS)",
 
 
 ## ---- cannonicalCoverage ----
+
+
+## ---- getCoverageBam ----
+# regions of interest
+# promoters on chr21
+promoter.gr=tss.gr
+start(promoter.gr)=start(promoter.gr)-1000
+end(promoter.gr)  =end(promoter.gr)+1000
+promoter.gr=promoter.gr[seqnames(promoter.gr)=="chr21"]
+
+library(Rsamtools)
+bamfile="data/wgEncodeHaibTfbsGm12878Sp1Pcr1xAlnRep1.chr21.bam"
+
+# get reads for regions of interest from the bam file
+param <- ScanBamParam(which=promoter.gr)
+alns <- readGAlignmentsFromBam(bamfile, param=param)
+
+covs=coverage(alns) # get coverage vectors
+
+myViews=Views(covs,as(promoter.gr,"RangesList")) # get subsets of coverage
+cov.mat=t(viewApply(myViews$chr21,as.vector)) # get coverage matrix
+
+# plot mean coverage
+plot(-1000:1000,colMeans(cov.mat),type="l",
+     ylab="mean coverage",xlab="window around TSS",
+     main="ChIP-Seq SP1")
+
+#image(cov.mat)
