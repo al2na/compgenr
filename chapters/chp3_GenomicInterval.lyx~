@@ -853,8 +853,7 @@ r package.
  memory as it is in BAM files.
  Usually, you will be interested in only a fraction of the genome, such
  as promoters, exons etc.
- So it is best you extract the data for those regions and read those into
- memory rather than the whole file.
+ 
 \end_layout
 
 \begin_layout Standard

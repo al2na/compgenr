@@ -778,12 +778,6 @@ status open
 
 \end_layout
 
-\begin_layout Standard
-The package can reads spliced reads from paired-end sequencing libraries
- as well, you need to specify...
- [EDIT HERE]
-\end_layout
-
 \begin_layout Section
 Dealing with continous scores over the genome
 \end_layout
@@ -791,93 +785,6 @@ Dealing with continous scores over the genome
 \begin_layout Standard
 Most high-througput data can be viewed as a continous score over the bases
  of the genome.
- In case of RNA-seq or ChIP-seq experiments the data can be represented
- as read coverage values per genomic base position.
- In addition, other information (not necesseraily from high-throughput experimen
-ts) ca be represented this way.
- The GC content and conservation scores per base are prime examples of other
- data sets that can be represented as scores.
- This sort of data can be stored as a generic text file or can have special
- formats such as Wig (stands for wiggle) from UCSC, or the bigWig format
- is which is indexed binary format of the wig files.
- The bigWig format is great for data that covers large fraction of the genome
- with varying scores, because the file is much smaller than regular text
- files that have the same information and it can be queried easier since
- it is indexed.
-\end_layout
-
-\begin_layout Standard
-In R/Bioconductor, the continous data can also be represented in a compressed
- format, in a format called Rle vector, which stands for run-length encoded
- vector.
- This gives supperior memory performance over regular vectors because repeating
- consecutive values are represented as one value in the Rle vector.
- Typically for genome-wide data you will have a RleList object which is
- a list of Rle vectors per chromosome.
- You can obtain such vectors by reading the reads in and calling coverage()
- function from GenomicRanges package.
- Let's try that on the above data set.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-One of the most common types of storing score data is, as mentioned, wig
- or bigWig format.
- Most of the ENCODE project data can be downloaded in bigWig format and
- conservation scores can be also downloaded as wig/bigWig format.
- You can also import bigWig files into R using import() function from rtracklaye
-r package.
- However, it is generally not advisible to read the whole bigWig file in
- memory as it is in BAM files.
- Usually, you will be interested in only a fraction of the genome, such
- as promoters, exons etc.
- So it is best you extract the data for those regions and read those into
- memory rather than the whole file.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-<<>>=
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-@
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
