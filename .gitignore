@@ -1,6 +1,7 @@
 .Rproj.user
+_book/
+.rmdbuild.Rda
+*.DS_Store
+log/
 .Rhistory
-.RData
-chapters/.DS_Store
-.DS_Store
-compgenr.Rproj
+chapters/
