@@ -1,5 +1,6 @@
-The tasks that are descrived above can be accomplished by R. R is not only a powerful statistical programming language but also go-to data analysis tool for many computational genomics experts. High- dimensional genomics datasets are usually suitable to be analyzed with core R packages and functions. On top of that, Bioconductor and CRAN have an array of specialized tools for doing genomics specific analysis.
-Here is a list of computational genomics tasks that can be com- pleted using R.
+# What can you do with R
+The tasks that are descrived above can be accomplished by R. R is not only a powerful statistical programming language but also go-to data analysis tool for many computational genomics experts. High-dimensional genomics datasets are usually suitable to be analyzed with core R packages and functions. On top of that, Bioconductor and CRAN have an array of specialized tools for doing genomics specific analysis.
+Here is a list of computational genomics tasks that can be completed using R.
 
 ### Data munging (pre-processing)
 
