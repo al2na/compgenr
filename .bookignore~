@@ -1,7 +1,6 @@
 *.RMD
 *.rmd
 *.Rmd
-*.R.md
 log/
 *.R
 *.Rproj
