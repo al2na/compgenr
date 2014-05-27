@@ -52,7 +52,7 @@ R_LIBS=~/Rlibs
 
 This tells R that “Rlibs” directory at your home directory will be the first choice of locations to look for packages and install packages (The directory name and location is up to you above is just an example). You should go and create that directory now. After that, start a fresh R session and start installing packages. From now on, packages will be installed to your local directory where you have read-write access.
 
-## Gettting help on functions and packages
+## Getting help on functions and packages
 You can get help on functions by help() and help.search() functions. You can list the functions in a package with ls() function
 
 ```{r,eval=FALSE}

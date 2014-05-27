@@ -1,6 +1,6 @@
 # Summary
 
-* [Computational Genomics and R](compgenr/README.Rmd)
+* [Computational Genomics and R](compgenr/README.md)
     * [What can you do with R ?](compgenr/what_can_you_do_with_r.Rmd)
 * [Quick Introduction to R](intro_to_r/README.Rmd)
     * [The Setup](intro_to_r/the_setup.Rmd)
