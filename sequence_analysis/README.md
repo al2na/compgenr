@@ -1,0 +1,2 @@
+# Sequence analysis
+An important part of genome analysis is the sequence analysis. One of the simple applications of sequence analysis is calculating G+C content and k-mer counts (i.e counting the number of AT di-nucleotides ) of the the genome or a set of sequences. More complicated tasks such as motif searching are also part of sequence analysis and are used frequently in computational genome analysis. Alignments of sequences, analysis of those alignments are also part of the sequence analysis in broad sense. We will show how to do basic sequence analysis using R packages.
