@@ -75,6 +75,58 @@ for(i in 1:100){
 head(result)
 ```
 
+### apply family functions instead of loops
+R has other ways of repeating tasks that tend to be more efficient than using loops. They are known as the **“apply”** family of functions, which include *apply,lapply, mapply and tapply* (and some other variants). All of these functions apply a given function to a set of instances and returns the result of those functions for each instance. The differences between them is that they take different type of inputs. For example apply works on data frames or matrices and applies the function on each row or column of the data structure. *lapply* works on lists or vectors and applies a function which takes the list element as an argument. Next we will demonstrate how to use **apply()** on a matrix. The example applies the sum function on the rows of a matrix, it basically sums up the values on each row of the matrix, which is conceptualized in Figure below.
 
+![alt text](../nonR_figures/apply.png "apply concept")
 
+```{r}
+mat=cbind(c(3,0,3,3),c(3,0,0,0),c(3,0,0,3),c(1,1,0,0),c(1,1,1,0),c(1,1,1,0))
+result<-apply(mat,1,sum)
+result
+# OR you can define the function as an argument to apply()
+result<-apply(mat,1,function(x) sum(x))
+result
+```
+Notice that we used a second argument which equals to 1, that indicates that rows of the matrix/ data frame will be the input for the function. If we change the second argument to 2, this will indicate that columns should be the input for the function that will be applied. See Figure for the visualization of apply() on columns.
 
+![alt text](../nonR_figures/apply2.png "apply on columns concept")
+
+```{r}
+result<-apply(mat,2,sum)
+result
+```
+Next, we will use **lapply()**, which applies a function on a list or a vector. The function that will be applied is a simple function that takes the square of a given number.
+
+```{r}
+input=c(1,2,3)
+lapply(input,function(x) x^2)
+```
+**mapply()** is another member of apply family, it can apply a function on an unlimited set of vectors/lists, it is like a version of lapply that can handle multiple vectors as arguments. In this case, the argument to the mapply() is the function to be applied and the sets of parameters to be supplied as arguments of the function. This conceptualized Figure below, the function to be applied is a function that takes to arguments and sums them up. The arguments to be summed up are in the format of vectors, Xs and Ys. mapply() applies the summation function to each pair in Xs and Ys vector. Notice that the order of the input function and extra arguments are different for mapply.
+![alt text](../nonR_figures/mapply.png "mapply  concept")
+
+```{r}
+Xs=0:5
+Ys=c(2,2,2,3,3,3)
+result<-mapply(function(x,y) sum(x,y),Xs,Ys)
+result
+```
+
+### apply family functions on multiple cores
+If you have large data sets apply family functions can be slow (although probably still better than for loops). If that is the case, you can easily use the parallel versions of those functions from parallel package. These functions essentially divide your tasks to smaller chunks run them on separate CPUs and merge the results from those parallel operations. This concept is visualized at Figure below , mcapply runs the summation function on three different processors. Each processor executes the summation function on a part of the data set, and the results are merged and returned as a single vector that has the same order as the input parameters Xs and Ys.
+![alt text](../nonR_figures/mcmapply.png "mcmapply  concept")
+
+## Vectorized Functions in R
+The above examples have been put forward to illustrate functions and loops in R because functions using sum() are not complicated and easy to understand. You will probably need to use loops and looping structures with more complicated functions. In reality, most of the operations we used do not need the use of loops or looping structures because there are already vectorized functions that can achieve the same outcomes, meaning if the input arguments are R vectors the output will be a vector as well, so no need for loops or vectorization.
+
+For example, instead of using mapply() and sum() functions we can just use + operator and sum up Xs and Ys.
+```{r}
+result=Xs+Ys
+result
+```
+In order to get the column or row sums, we can use the vectorized functions colSums() and rowSums().
+```{r}
+colSums(mat)
+rowSums(mat)
+```
+However, remember that not every function is vectorized in R, use the ones that are. But sooner or later, apply family functions will come in handy.

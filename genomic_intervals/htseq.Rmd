@@ -1,0 +1,20 @@
+# Dealing with high-throughput sequencing reads
+In recent years, advances in sequencing technology helped researchers sequence the genome deeper than ever. The reads from sequencing machines are usually aligned to the genome and the next task is to quantify the enrichment of those aligned reads in the regions of interest. You may want to count how many reads overlapping with your promoter set of interest or you may want to quantify RNA-seq reads overlapping with exons. This is similar to operations on genomic intervals which are described previously. If you can read all your alignments into the memory and create a GRanges object, you can apply the previously described operations. However, most of the time we can not read all mapped reads into the memory, so we have to use specialized tools to query and quantify alignments on a given set of regions. One of the most common alignment formats is SAM/BAM format, most aligners will produce SAM/BAM output or you will be able to convert your specific alignment format to SAM/BAM format. BAM format is binary version of the human readable SAM format. SAM format have specific columns that contain different kind of information about the aligment such as mismatches, qualities etc. (see http://samtools.sourceforge.net/SAM1.pdf for SAM format specification).
+
+## Quality check on sequencing reads and mapping reads to the genome
+
+For a long time, quality check and mapping were tasks outside the R domain. However, certain packages in Bioconductor currently can deal with those tasks. Although, we will not go into detail we will mention some packages that can help with quality check and mapping.
+
+Read quality checking is possible with Bioconductor packages: qcrc, Rsubread and QuasR. All the packages seem to have interface to C for fast quality score calculations or I/O operations. For the read mapping, QuasR uses Rbowtie package and produces BAM files (see below for short intro on BAM) and Rsubread employs its own mapping algorithm and can also produce BAM files.
+
+## Counting mapped reads for a set of regions
+
+Rsamtools package has functions to query BAM files. The function we will use in the first example is countBam which takes input of the BAM file and param argument. “param” argument takes a ScanBamParam object. The object is returned by ScanBamParam() function and contains parameters for scanning the BAM file. The example below is a simple example and ScanBamParam() only includes regions of interest.
+
+<<count_reads, messages=FALSE>>=
+
+Alternatively, aligned reads can be read in using GenomicRanges package (which on this occasion relies on RSamtools package).
+
+<<>>=
+
+The package can reads spliced reads from paired-end sequencing libraries as well, you need to specify... [EDIT HERE]

@@ -1,0 +1,71 @@
+# Operations on Genomic Intervals with GenomicRanges package
+[Bioconductor](http://bioconductor.org) project has a dedicated package called **GenomicRanges** to deal with genomic intervals. In this section, we will provide use cases involving operations on genomic intervals. The main reason we will stick to this package is that it provides tools to do overlap operations. However package requires that users operate on specific data types that are conceptually similar to a tabular data structure implemented in a way that makes overlapping and related operations easier. The main object we will be using is called GRanges object and we will also see some other related objects from the GenomicRanges package.
+
+## How to create and manipulate a GRanges object
+
+GRanges (from GenomicRanges package) is the main object that holds the genomic intervals and extra information about those intervals. Here we will show how to create one. Conceptually, it is similar to a data frame and some operations such as using **[ ]** notation to subset the table will work also on GRanges, but keep in mind that not everything that works for data frames will work on GRanges objects.
+```{r,createGR}
+
+```
+As you can see it looks a bit like a data frame. Also, note that the peculiar second argument “ranges” which basically contains start and end positions of the genomic intervals. However, you can not just give start and end positions you actually have to provide another object of IRanges. Do not let this confuse you, GRanges actually depends on another object that is very similar to itself called IRanges and you have to provide the “ranges” argument as an IRanges object. In its simplest for, an IRanges object can be construcuted by providing start and end positions to IRanges() function. Think of it as something you just have to provide in order to construct the GRanges object.
+
+GRanges can also contain other information about the genomic interval such as scores, names, etc. You can provide extra information at the time of the construction or you can add it later. Here is how you can do those:
+```{r,createGRwMetadata}
+
+```
+
+## Getting genomic regions into R as GRanges objects
+
+There are multiple ways you can read in your genomic features into R and create a GRanges object. Most genomic interval data comes as a tabular format that has the basic information about the location of the interval and some other information. We already showed how to read BED files as data frame. Now we will show how to convert it to GRanges object.
+
+<<convertDataframe2gr>>=
+@
+
+Reading the genomic features as text files and converting to GRanges is not the only way to create GRanges object. With the help of rtracklayer package we can directly import.
+
+<<importbed_rtracklayer>>=
+# using rtracklayer to import genomic features
+# from flat files
+
+
+Now we will show how to use other packages to automatically obtain the data in GRanges format. But you will not be able to use these methods for every data set so it is good to now how to read data from flat files as well. First, we will use rtracklayer package to download data from UCSC browser. We will download CpG islands as GRanges objects.
+
+<<importFromUCSC>>=
+# using rtracklayer to import genomic features
+# from UCSC browser
+@
+Next, we will show how to use GenomicFeatures package.
+<<genomicFeaturesImport>>=
+# using GenomicFeatures to import genomic features
+
+@
+## Finding regions that (does/does not) overlap with another set of regions
+
+This is one of the most common tasks in genomics. Usually, you have a set of regions that you are interested in and you want to see if they overlap with another set of regions or see how many of them overlap. A good example is transcription factor binding sites determined by ChIP-seq experiments. In these types of experiments and followed analysis, one usually ends up with genomic regions that are enriched in bound transcription factors (sites of transcription factor binding) and the
+
+subsetByOverlaps
+
+<<subsetByOverlaps>>=
+
+countOverlaps
+
+<<countOverlaps>>=
+
+findOverlaps and its uses
+
+<<findOverlaps>>=
+
+find nearest
+
+<<findNearest>>=
+
+## Finding coverage of intervals over the genome
+find cannonical binding sites
+
+<<findCanonical>>=
+
+find coverage of biding sites on promoters
+
+<<cannonicalCoverage>>=
+
+sdsd
