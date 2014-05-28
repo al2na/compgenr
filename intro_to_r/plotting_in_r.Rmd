@@ -35,7 +35,7 @@ In addition, outliers can be depicted as dots. In this case, outliers are the va
 ```
 Next up is bar plot which you can plot by **barplot()** function. We are going to plot four imaginary percentage values and color them with two colors, and this time we will also show how to draw a legend on the plot using **legend()** function.
 
-```{r}
+```{r,tidy=FALSE}
 perc=c(50,70,35,25)
 barplot(height=perc,names.arg=c("CpGi","exon","CpGi","exon"),
         ylab="percentages",main="imagine %s",

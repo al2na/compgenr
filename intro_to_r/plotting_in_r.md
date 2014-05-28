@@ -50,10 +50,11 @@ Next up is bar plot which you can plot by **barplot()** function. We are going t
 
 
 ```r
-perc = c(50, 70, 35, 25)
-barplot(height = perc, names.arg = c("CpGi", "exon", "CpGi", "exon"), ylab = "percentages", 
-    main = "imagine %s", col = c("red", "red", "blue", "blue"))
-legend("topright", legend = c("test", "control"), fill = c("red", "blue"))
+perc=c(50,70,35,25)
+barplot(height=perc,names.arg=c("CpGi","exon","CpGi","exon"),
+        ylab="percentages",main="imagine %s",
+        col=c("red","red","blue","blue"))
+legend("topright",legend=c("test","control"),fill=c("red","blue"))
 ```
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5.png) 

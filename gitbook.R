@@ -21,12 +21,15 @@ buildGitbook2<-function(source.dir = getwd(), out.dir = paste0(getwd(), "/_book"
   writeLines(gsub(".Rmd",".md",sums), f)
   close(f)
   
-  buildGitbook(source.dir = source.dir, out.dir = out.dir,
+  tryCatch(buildGitbook(source.dir = source.dir, out.dir = out.dir,
                buildRmd = buildRmd, format, gitbook.params, ...)
+  )  
+  message('Reverting to old SUMMARY.md...')
   file.rename(paste0(source.dir,"/.SUMMARY.md"), paste0(source.dir,"/SUMMARY.md"))
   
 }
 
 
-buildGitbook2(source.dir = getwd(), out.dir = paste0(getwd(), "/_book"),
-              buildRmd = TRUE )
+buildGitbook2(source.dir = getwd(), out.dir = paste0(getwd(), "/_book"), buildRmd = TRUE )
+
+publishGitbook("al2na/compgenr", out.dir = paste0(getwd(), "/_book"), message = "Update built gitbook")

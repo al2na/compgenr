@@ -2,7 +2,7 @@
 R has multiple data structures. If you are familiar with excel you can think of data structures as building blocks of a table and the table it self, a table is similar to a sheet in excel. Most of the time you will deal with tabular data sets, you will manipulate them, take sub-sections of them. It is good to know what are the common data structures in R and how they can be used.
 
 ## Vectors
-Vectors is one the core R data structures. It is basically a list of elements of the same type (numeric,character or logical). Later you will see that every column of a table will be represented as a vector. R handles vectors easily and intuitively. You can create vectors with c() function, however that is not the only way. The operations on vectors will propagate to all the elements of the vectors.
+Vectors are one the core R data structures. It is basically a list of elements of the same type (numeric,character or logical). Later you will see that every column of a table will be represented as a vector. R handles vectors easily and intuitively. You can create vectors with c() function, however that is not the only way. The operations on vectors will propagate to all the elements of the vectors.
 
 ```{r}
 x<-c(1,3,2,10,5)    #create a vector x with 5 components
@@ -35,6 +35,11 @@ You can also directly list the elements and specify the matrix:
 m2<-matrix(c(1,3,2,5,-1,2,2,3,9),nrow=3)
 m2
 ```
+Matrices and the next data structure **data frames** are tabular data structures. You can subset them using **[]** and providing desired rows and columns to subset. Here is how that works conceptually:
+![alt text](../nonR_figures/slicingDataFrames.png "slicing/subsetting")
+*slicing/subsetting of a matrix and data frame*.There are additional ways to subset data frames, see the next section.
+
+
 ## Data Frames
 A data frame is more general than a matrix, in that different columns can have different modes (numeric, character, factor, etc.). A data frame can be constructed by data.frame() function. For example, we illustrate how to construct a data frame from genomic intervals or coordinates.
 
