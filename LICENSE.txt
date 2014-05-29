@@ -1,0 +1,4 @@
+this works is under CreativeCommons license: CC BY-NC-SA 3.0
+http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US
+
+The code used in the work is under GPL|Artistic-2.0 license

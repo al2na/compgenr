@@ -1,0 +1,543 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
+        
+        <meta charset="UTF-8">
+        <title>Operations on Genomic Intervals with GenomicRanges package | Notes on Computational Genomics with R</title>
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="robots" content="index, follow">
+        <meta name="author" content="al2na">
+        <meta name="description" content="This is somewhat an opinionated guide on using R for computational genomics. It is aimed at wet-lab researchers who wants to use R in their data analysis ,and bioinformaticians who are new to R and wants to learn more about its capabilities for genomics data analysis.">
+        <meta name="keywords" content="gitbook,github" >
+        <meta name="generator" content="www.gitbook.io">
+
+        
+        <link rel="next" href="../genomic_intervals/htseq.html" />
+        
+        
+        <link rel="prev" href="../genomic_intervals/README.html" />
+        
+
+        <meta property="og:title" content="Operations on Genomic Intervals with GenomicRanges package | Notes on Computational Genomics with R">
+        <meta property="og:site_name" content="Notes on Computational Genomics with R">
+        <meta property="og:type" content="book">
+        <meta property="og:locale" content="en_US">
+
+        <meta property="book:author" content="https://github.com/al2na">
+        <meta property="book:tag" content="GitBook">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    </head>
+    <body>
+        
+        <link rel="stylesheet" href="../gitbook/style.css">
+        
+        
+    <div class="book" data-github="al2na/compgenr" data-level="3.1" data-basepath=".." data-revision="1401401823619">
+    <div class="book-header">
+    <!-- Actions Left -->
+    
+    <a href="https://github.com/al2na/compgenr" target="_blank" class="btn pull-left"><i class="fa fa-github-alt"></i></a>
+    
+    <a href="#" class="btn pull-left toggle-summary"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search"><i class="fa fa-search"></i></a>
+
+    <!-- Actions Right -->
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="google-plus"><i class="fa fa-google-plus"></i></a>
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="facebook"><i class="fa fa-facebook"></i></a>
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="twitter"><i class="fa fa-twitter"></i></a>
+
+    
+    <a href="https://github.com/al2na/compgenr/stargazers" target="_blank" class="btn pull-right count-star"><i class="fa fa-star-o"></i> Star (<span>-</span>)</a>
+    <a href="https://github.com/al2na/compgenr/watchers" target="_blank" class="btn pull-right count-watch"><i class="fa fa-eye"></i> Watch (<span>-</span>)</a>
+    
+
+    <!-- Title -->
+    <h1><a href="../" >Notes on Computational Genomics with R</a></h1>
+</div>
+
+    <div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        <li>
+            <a href="https://github.com/al2na" target="blank">About the author</a>
+        </li>
+        <li>
+            <a href="https://github.com/al2na/compgenr/issues" target="blank">Questions and Issues</a>
+        </li>
+        <li>
+            <a href="https://github.com/al2na/compgenr/edit/master/genomic_intervals/granges.md" target="blank">Edit and Contribute</a>
+        </li>
+        <li class="divider"></li>
+        
+        <li data-level="0" data-path="index.html">
+            <a href="../index.html"><i class="fa fa-check"></i> Introduction</a>
+        </li>
+        
+            <li  data-level="1" data-path="compgenr/README.html">
+                
+                <a href="../compgenr/README.html">
+                    <i class="fa fa-check"></i> <b>1.</b> Computational Genomics and R
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="1.1" data-path="compgenr/what_can_you_do_with_r.html">
+                            
+                            <a href="../compgenr/what_can_you_do_with_r.html">
+                                <i class="fa fa-check"></i> <b>1.1.</b> What can you do with R ?
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="2" data-path="intro_to_r/README.html">
+                
+                <a href="../intro_to_r/README.html">
+                    <i class="fa fa-check"></i> <b>2.</b> Quick Introduction to R
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="2.1" data-path="intro_to_r/the_setup.html">
+                            
+                            <a href="../intro_to_r/the_setup.html">
+                                <i class="fa fa-check"></i> <b>2.1.</b> The Setup
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.2" data-path="intro_to_r/computations_in_r.html">
+                            
+                            <a href="../intro_to_r/computations_in_r.html">
+                                <i class="fa fa-check"></i> <b>2.2.</b> Computations in R
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.3" data-path="intro_to_r/data_types.html">
+                            
+                            <a href="../intro_to_r/data_types.html">
+                                <i class="fa fa-check"></i> <b>2.3.</b> Data structures and  types
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.4" data-path="intro_to_r/reading_and_writing_data.html">
+                            
+                            <a href="../intro_to_r/reading_and_writing_data.html">
+                                <i class="fa fa-check"></i> <b>2.4.</b> Reading and writing data
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.5" data-path="intro_to_r/plotting_in_r.html">
+                            
+                            <a href="../intro_to_r/plotting_in_r.html">
+                                <i class="fa fa-check"></i> <b>2.5.</b> Plotting in R
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.6" data-path="intro_to_r/functions_and_control_structures_for,_ifelse_etc.html">
+                            
+                            <a href="../intro_to_r/functions_and_control_structures_for,_ifelse_etc.html">
+                                <i class="fa fa-check"></i> <b>2.6.</b> Functions and control structures (for, if/else etc.) 
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="3" data-path="genomic_intervals/README.html">
+                
+                <a href="../genomic_intervals/README.html">
+                    <i class="fa fa-check"></i> <b>3.</b> Genomic Intervals
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="3.1" data-path="genomic_intervals/granges.html">
+                            
+                            <a href="../genomic_intervals/granges.html">
+                                <i class="fa fa-check"></i> <b>3.1.</b> Operations on Genomic Intervals with GenomicRanges package
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="3.2" data-path="genomic_intervals/htseq.html">
+                            
+                            <a href="../genomic_intervals/htseq.html">
+                                <i class="fa fa-check"></i> <b>3.2.</b> Dealing with high-throughput sequencing reads
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="3.3" data-path="genomic_intervals/scores.html">
+                            
+                            <a href="../genomic_intervals/scores.html">
+                                <i class="fa fa-check"></i> <b>3.3.</b> Dealing with contiguous scores over the genome
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="4" data-path="sequence_analysis/README.html">
+                
+                <a href="../sequence_analysis/README.html">
+                    <i class="fa fa-check"></i> <b>4.</b> Sequence analysis
+                </a>
+                
+                
+            </li>
+        
+            <li  data-level="5" data-path="visualization/README.html">
+                
+                <a href="../visualization/README.html">
+                    <i class="fa fa-check"></i> <b>5.</b> Visualization
+                </a>
+                
+                
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="page-wrapper" tabindex="-1">
+                <div class="book-progress">
+    <div class="bar">
+        <div class="inner" style="width: 73.33333333333333%;min-width: 66.66666666666667%;"></div>
+    </div>
+    <div class="chapters">
+    
+        <a href="../index.html" title="Introduction" class="chapter done new-chapter" data-progress="0" style="left: 0%;"></a>
+    
+        <a href="../compgenr/README.html" title="Computational Genomics and R" class="chapter done new-chapter" data-progress="1" style="left: 6.666666666666667%;"></a>
+    
+        <a href="../compgenr/what_can_you_do_with_r.html" title="What can you do with R ?" class="chapter done " data-progress="1.1" style="left: 13.333333333333334%;"></a>
+    
+        <a href="../intro_to_r/README.html" title="Quick Introduction to R" class="chapter done new-chapter" data-progress="2" style="left: 20%;"></a>
+    
+        <a href="../intro_to_r/the_setup.html" title="The Setup" class="chapter done " data-progress="2.1" style="left: 26.666666666666668%;"></a>
+    
+        <a href="../intro_to_r/computations_in_r.html" title="Computations in R" class="chapter done " data-progress="2.2" style="left: 33.333333333333336%;"></a>
+    
+        <a href="../intro_to_r/data_types.html" title="Data structures and  types" class="chapter done " data-progress="2.3" style="left: 40%;"></a>
+    
+        <a href="../intro_to_r/reading_and_writing_data.html" title="Reading and writing data" class="chapter done " data-progress="2.4" style="left: 46.666666666666664%;"></a>
+    
+        <a href="../intro_to_r/plotting_in_r.html" title="Plotting in R" class="chapter done " data-progress="2.5" style="left: 53.333333333333336%;"></a>
+    
+        <a href="../intro_to_r/functions_and_control_structures_for,_ifelse_etc.html" title="Functions and control structures (for, if/else etc.) " class="chapter done " data-progress="2.6" style="left: 60%;"></a>
+    
+        <a href="../genomic_intervals/README.html" title="Genomic Intervals" class="chapter done new-chapter" data-progress="3" style="left: 66.66666666666667%;"></a>
+    
+        <a href="../genomic_intervals/granges.html" title="Operations on Genomic Intervals with GenomicRanges package" class="chapter done " data-progress="3.1" style="left: 73.33333333333333%;"></a>
+    
+        <a href="../genomic_intervals/htseq.html" title="Dealing with high-throughput sequencing reads" class="chapter  " data-progress="3.2" style="left: 80%;"></a>
+    
+        <a href="../genomic_intervals/scores.html" title="Dealing with contiguous scores over the genome" class="chapter  " data-progress="3.3" style="left: 86.66666666666667%;"></a>
+    
+        <a href="../sequence_analysis/README.html" title="Sequence analysis" class="chapter  new-chapter" data-progress="4" style="left: 93.33333333333333%;"></a>
+    
+        <a href="../visualization/README.html" title="Visualization" class="chapter  new-chapter" data-progress="5" style="left: 100%;"></a>
+    
+    </div>
+</div>
+
+                <div class="page-inner">
+                
+                    <section class="normal" id="section-gitbook_5">
+                    
+                        <h1 id="operations-on-genomic-intervals-with-genomicranges-package">Operations on Genomic Intervals with GenomicRanges package</h1>
+<p><a href="http://bioconductor.org/" target="_blank">Bioconductor</a> project has a dedicated package called <a href="http://www.bioconductor.org/packages/release/bioc/html/GenomicRanges.html" target="_blank"><strong>GenomicRanges</strong></a> to deal with genomic intervals. In this section, we will provide use cases involving operations on genomic intervals. The main reason we will stick to this package is that it provides tools to do overlap operations. However package requires that users operate on specific data types that are conceptually similar to a tabular data structure implemented in a way that makes overlapping and related operations easier. The main object we will be using is called GRanges object and we will also see some other related objects from the GenomicRanges package.</p>
+<h2 id="how-to-create-and-manipulate-a-granges-object">How to create and manipulate a GRanges object</h2>
+<p>GRanges (from GenomicRanges package) is the main object that holds the genomic intervals and extra information about those intervals. Here we will show how to create one. Conceptually, it is similar to a data frame and some operations such as using <strong>[ ]</strong> notation to subset the table will work also on GRanges, but keep in mind that not everything that works for data frames will work on GRanges objects.</p>
+<pre><code class="lang-r"><span class="hljs-keyword">library</span>(GenomicRanges)
+gr=GRanges(seqnames=c(<span class="hljs-string">"chr1"</span>,<span class="hljs-string">"chr2"</span>,<span class="hljs-string">"chr2"</span>),
+           ranges=IRanges(start=c(<span class="hljs-number">50</span>,<span class="hljs-number">150</span>,<span class="hljs-number">200</span>),end=c(<span class="hljs-number">100</span>,<span class="hljs-number">200</span>,<span class="hljs-number">300</span>)),
+           strand=c(<span class="hljs-string">"+"</span>,<span class="hljs-string">"-"</span>,<span class="hljs-string">"-"</span>)
+)
+gr
+</code></pre>
+<pre><code>## GRanges with 3 ranges and 0 metadata columns:
+##       seqnames     ranges strand
+##          &lt;Rle&gt;  &lt;IRanges&gt;  &lt;Rle&gt;
+##   [1]     chr1 [ 50, 100]      +
+##   [2]     chr2 [150, 200]      -
+##   [3]     chr2 [200, 300]      -
+##   ---
+##   seqlengths:
+##    chr1 chr2
+##      NA   NA
+</code></pre><pre><code class="lang-r"><span class="hljs-comment"># subset like a data frame</span>
+gr[<span class="hljs-number">1</span>:<span class="hljs-number">2</span>,]
+</code></pre>
+<pre><code>## GRanges with 2 ranges and 0 metadata columns:
+##       seqnames     ranges strand
+##          &lt;Rle&gt;  &lt;IRanges&gt;  &lt;Rle&gt;
+##   [1]     chr1 [ 50, 100]      +
+##   [2]     chr2 [150, 200]      -
+##   ---
+##   seqlengths:
+##    chr1 chr2
+##      NA   NA
+</code></pre><p>As you can see it looks a bit like a data frame. Also, note that the peculiar second argument “ranges” which basically contains start and end positions of the genomic intervals. However, you can not just give start and end positions you actually have to provide another object of IRanges. Do not let this confuse you, GRanges actually depends on another object that is very similar to itself called IRanges and you have to provide the “ranges” argument as an IRanges object. In its simplest for, an IRanges object can be construcuted by providing start and end positions to IRanges() function. Think of it as something you just have to provide in order to construct the GRanges object.</p>
+<p>GRanges can also contain other information about the genomic interval such as scores, names, etc. You can provide extra information at the time of the construction or you can add it later. Here is how you can do those:</p>
+<pre><code class="lang-r">gr=GRanges(seqnames=c(<span class="hljs-string">"chr1"</span>,<span class="hljs-string">"chr2"</span>,<span class="hljs-string">"chr2"</span>),
+           ranges=IRanges(start=c(<span class="hljs-number">50</span>,<span class="hljs-number">150</span>,<span class="hljs-number">200</span>),end=c(<span class="hljs-number">100</span>,<span class="hljs-number">200</span>,<span class="hljs-number">300</span>)),
+           names=c(<span class="hljs-string">"id1"</span>,<span class="hljs-string">"id3"</span>,<span class="hljs-string">"id2"</span>),
+           scores=c(<span class="hljs-number">100</span>,<span class="hljs-number">90</span>,<span class="hljs-number">50</span>)
+)
+<span class="hljs-comment"># or add it later (replaces the existing meta data)</span>
+mcols(gr)=DataFrame(name2=c(<span class="hljs-string">"pax6"</span>,<span class="hljs-string">"meis1"</span>,<span class="hljs-string">"zic4"</span>),
+                    score2=c(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>))
+
+gr=GRanges(seqnames=c(<span class="hljs-string">"chr1"</span>,<span class="hljs-string">"chr2"</span>,<span class="hljs-string">"chr2"</span>),
+           ranges=IRanges(start=c(<span class="hljs-number">50</span>,<span class="hljs-number">150</span>,<span class="hljs-number">200</span>),end=c(<span class="hljs-number">100</span>,<span class="hljs-number">200</span>,<span class="hljs-number">300</span>)),
+           names=c(<span class="hljs-string">"id1"</span>,<span class="hljs-string">"id3"</span>,<span class="hljs-string">"id2"</span>),
+           scores=c(<span class="hljs-number">100</span>,<span class="hljs-number">90</span>,<span class="hljs-number">50</span>)
+)
+
+<span class="hljs-comment"># or appends to existing meta data</span>
+mcols(gr)=cbind(mcols(gr),
+                          DataFrame(name2=c(<span class="hljs-string">"pax6"</span>,<span class="hljs-string">"meis1"</span>,<span class="hljs-string">"zic4"</span>)) )
+gr
+</code></pre>
+<pre><code>## GRanges with 3 ranges and 2 metadata columns:
+##       seqnames     ranges strand |       V1       V2
+##          &lt;Rle&gt;  &lt;IRanges&gt;  &lt;Rle&gt; |   &lt;list&gt;   &lt;list&gt;
+##   [1]     chr1 [ 50, 100]      * | ######## ########
+##   [2]     chr2 [150, 200]      * | ######## ########
+##   [3]     chr2 [200, 300]      * | ######## ########
+##   ---
+##   seqlengths:
+##    chr1 chr2
+##      NA   NA
+</code></pre><pre><code class="lang-r"><span class="hljs-comment"># elementMetadata() and values() do the same things</span>
+elementMetadata(gr)
+</code></pre>
+<pre><code>## DataFrame with 3 rows and 2 columns
+##         V1       V2
+##     &lt;list&gt;   &lt;list&gt;
+## 1 ######## ########
+## 2 ######## ########
+## 3 ######## ########
+</code></pre><pre><code class="lang-r">values(gr)
+</code></pre>
+<pre><code>## DataFrame with 3 rows and 2 columns
+##         V1       V2
+##     &lt;list&gt;   &lt;list&gt;
+## 1 ######## ########
+## 2 ######## ########
+## 3 ######## ########
+</code></pre><h2 id="getting-genomic-regions-into-r-as-granges-objects">Getting genomic regions into R as GRanges objects</h2>
+<p>There are multiple ways you can read in your genomic features into R and create a GRanges object. Most genomic interval data comes as a tabular format that has the basic information about the location of the interval and some other information. We already showed how to read BED files as data frame. Now we will show how to convert it to GRanges object. This is one way of doing it, but there are more convinient ways described further in the text.</p>
+<pre><code class="lang-r"><span class="hljs-comment"># read CpGi data set</span>
+cpgi.df = read.table(<span class="hljs-string">"../data/cpgi.hg19.chr21.bed"</span>, header = <span class="hljs-literal">FALSE</span>,
+                     stringsAsFactors=<span class="hljs-literal">FALSE</span>) 
+<span class="hljs-comment"># remove chr names with "_"</span>
+cpgi.df =cpgi.df [grep(<span class="hljs-string">"_"</span>,cpgi.df[,<span class="hljs-number">1</span>],invert=<span class="hljs-literal">TRUE</span>),]
+
+cpgi.gr=GRanges(seqnames=cpgi.df[,<span class="hljs-number">1</span>],
+                ranges=IRanges(start=cpgi.df[,<span class="hljs-number">2</span>],
+                              end=cpgi.df[,<span class="hljs-number">3</span>]))
+</code></pre>
+<p>You may need to do some pre-processing before/after reading in the BED file. Below is an example of getting transcription start sites from BED files containing refseq transcript locations.</p>
+<pre><code class="lang-r"><span class="hljs-comment"># read refseq file</span>
+ref.df = read.table(<span class="hljs-string">"../data/refseq.hg19.chr21.bed"</span>, header = <span class="hljs-literal">FALSE</span>,
+                     stringsAsFactors=<span class="hljs-literal">FALSE</span>) 
+ref.gr=GRanges(seqnames=ref.df[,<span class="hljs-number">1</span>],
+               ranges=IRanges(start=ref.df[,<span class="hljs-number">2</span>],
+                              end=ref.df[,<span class="hljs-number">3</span>]),
+               strand=ref.df[,<span class="hljs-number">6</span>],name=ref.df[,<span class="hljs-number">4</span>])
+<span class="hljs-comment"># get TSS</span>
+tss.gr=ref.gr
+<span class="hljs-comment"># end of the + strand genes must be equalized to start pos</span>
+end(tss.gr[strand(tss.gr)==<span class="hljs-string">"+"</span>,])  =start(tss.gr[strand(tss.gr)==<span class="hljs-string">"+"</span>,])
+<span class="hljs-comment"># startof the - strand genes must be equalized to end pos</span>
+start(tss.gr[strand(tss.gr)==<span class="hljs-string">"-"</span>,])=end(tss.gr[strand(tss.gr)==<span class="hljs-string">"-"</span>,])
+<span class="hljs-comment"># remove duplicated TSSes ie alternative transcripts</span>
+<span class="hljs-comment"># this keeps the first instance and removes duplicates</span>
+tss.gr=tss.gr[!duplicated(tss.gr),]
+</code></pre>
+<p>Reading the genomic features as text files and converting to GRanges is not the only way to create GRanges object. With the help of <a href="http://www.bioconductor.org/packages/release/bioc/html/rtracklayer.html" target="_blank">rtracklayer</a> package we can directly import BED files.</p>
+<pre><code class="lang-r"><span class="hljs-keyword">require</span>(rtracklayer)
+import.bed(<span class="hljs-string">"../data/refseq.hg19.chr21.bed"</span>)
+</code></pre>
+<p>Now we will show how to use other packages to automatically obtain the data in GRanges format. But you will not be able to use these methods for every data set so it is good to now how to read data from flat files as well. First, we will use rtracklayer package to download data from <a href="http://genome-euro.ucsc.edu/cgi-bin/hgGateway?hgsid=197855328_moRAG0Dqe1qlcOEtNDAt09E1e6ab" target="_blank">UCSC browser</a>. We will download CpG islands as GRanges objects.</p>
+<pre><code class="lang-r"><span class="hljs-keyword">require</span>(rtracklayer)
+session &lt;- browserSession()
+genome(session) &lt;- <span class="hljs-string">"mm9"</span>
+<span class="hljs-comment">## choose CpG island track on chr12</span>
+query &lt;- ucscTableQuery(session, track=<span class="hljs-string">"CpG Islands"</span>,table=<span class="hljs-string">"cpgIslandExt"</span>,
+        range=GRangesForUCSCGenome(<span class="hljs-string">"mm9"</span>, <span class="hljs-string">"chr12"</span>))
+<span class="hljs-comment">## get the GRanges object for the track</span>
+track(query)
+</code></pre>
+<pre><code>## UCSC track &#39;cpgIslandExt&#39;
+## UCSCData with 627 ranges and 1 metadata column:
+##         seqnames                 ranges strand   |        name
+##            &lt;Rle&gt;              &lt;IRanges&gt;  &lt;Rle&gt;   | &lt;character&gt;
+##     [1]    chr12     [3235441, 3235920]      *   |     CpG:_55
+##     [2]    chr12     [3309325, 3310176]      *   |    CpG:_112
+##     [3]    chr12     [3365112, 3365428]      *   |     CpG:_33
+##     [4]    chr12     [3426606, 3427706]      *   |    CpG:_112
+##     [5]    chr12     [3572056, 3572883]      *   |     CpG:_87
+##     ...      ...                    ...    ... ...         ...
+##   [623]    chr12 [120074998, 120075659]      *   |     CpG:_64
+##   [624]    chr12 [120081568, 120081824]      *   |     CpG:_22
+##   [625]    chr12 [120085202, 120085696]      *   |     CpG:_45
+##   [626]    chr12 [120086987, 120088377]      *   |    CpG:_147
+##   [627]    chr12 [120476260, 120476575]      *   |     CpG:_23
+##   ---
+##   seqlengths:
+##            chr1         chr2         chr3 ...  chrX_random  chrY_random
+##       197195432    181748087    159599783 ...      1785075     58682461
+</code></pre><h2 id="finding-regions-that-does-does-not-overlap-with-another-set-of-regions">Finding regions that (does/does not) overlap with another set of regions</h2>
+<p>This is one of the most common tasks in genomics. Usually, you have a set of regions that you are interested in and you want to see if they overlap with another set of regions or see how many of them overlap. A good example is transcription factor binding sites determined by <a href="http://en.wikipedia.org/wiki/ChIP-sequencing" target="_blank">ChIP-seq</a> experiments. In these types of experiments and followed analysis, one usually ends up with genomic regions that are bound by transcription factors. One of the standard next questions would be to annotate binding sites with genomic annotations such as promoter,exon,intron and/or CpG islands. Below is a demonstration of how transcription factor binding sites can be annotated using CpG islands. First, we will get the subset of binding sites that overlap with the CpG islands. In this case, binding sites are ChIP-seq peaks.</p>
+<p>We can find the subset of peaks that overlap with the CpG islands using subsetByoverlaps() function. You will also see another way of converting <strong>data frames</strong> to <strong>GRanges</strong>.</p>
+<pre><code class="lang-r">pk1=read.table(<span class="hljs-string">"../data/wgEncodeHaibTfbsGm12878Sp1Pcr1xPkRep1.broadPeak.gz"</span>)
+head(pk1)
+</code></pre>
+<pre><code>##     V1    V2    V3    V4  V5 V6     V7 V8 V9
+## 1 chr1  9990 10480 peak1 143  .  464.2 -1 -1
+## 2 chr1 11020 12230 peak2 347  . 1123.6 -1 -1
+## 3 chr1 13882 14300 peak3  68  .  221.8 -1 -1
+## 4 chr1 22720 23011 peak4  33  .  109.6 -1 -1
+## 5 chr1 23479 23786 peak5  40  .  129.5 -1 -1
+## 6 chr1 25950 26457 peak6  69  .  225.6 -1 -1
+</code></pre><pre><code class="lang-r"><span class="hljs-comment"># convert data frame to GRanges</span>
+pk1.gr=makeGRangesFromDataFrame(pk1,
+        seqnames.field=c(<span class="hljs-string">"V1"</span>),
+        start.field=c(<span class="hljs-string">"V2"</span>),
+        end.field=c(<span class="hljs-string">"V3"</span>))
+<span class="hljs-comment"># only peaks on chr21</span>
+pk1.gr=pk1.gr[seqnames(pk1.gr)==<span class="hljs-string">"chr21"</span>,]
+<span class="hljs-comment"># get the peaks that overlap with CpG</span>
+<span class="hljs-comment"># islands</span>
+subsetByOverlaps(pk1.gr,cpgi.gr)
+</code></pre>
+<pre><code>## GRanges with 44 ranges and 0 metadata columns:
+##        seqnames               ranges strand
+##           &lt;Rle&gt;            &lt;IRanges&gt;  &lt;Rle&gt;
+##    [1]    chr21 [ 9825359,  9826582]      *
+##    [2]    chr21 [ 9968468,  9968984]      *
+##    [3]    chr21 [15755367, 15755956]      *
+##    [4]    chr21 [19191578, 19192525]      *
+##    [5]    chr21 [26979618, 26980048]      *
+##    ...      ...                  ...    ...
+##   [40]    chr21 [46237463, 46237809]      *
+##   [41]    chr21 [46707701, 46708084]      *
+##   [42]    chr21 [46961551, 46961875]      *
+##   [43]    chr21 [47743586, 47744125]      *
+##   [44]    chr21 [47878411, 47878891]      *
+##   ---
+##   seqlengths:
+##     chr1 chr10 chr11 chr12 chr13 chr14 ...  chr6  chr7  chr8  chr9  chrX
+##       NA    NA    NA    NA    NA    NA ...    NA    NA    NA    NA    NA
+</code></pre><p>For each CpG island, we can count the number of peaks that overlap with a given CpG island with countOverlaps().</p>
+<pre><code class="lang-r"><span class="hljs-comment">#count the peaks that</span>
+<span class="hljs-comment"># overlap with CpG islands</span>
+counts=countOverlaps(pk1.gr,cpgi.gr)
+head(counts)
+</code></pre>
+<pre><code>## [1] 0 0 0 0 0 0
+</code></pre><p>findOverlaps() function can be used to see one-to-one overlaps between peaks and CpG islands. It returns a matrix showing which peak overlaps with which CpGi island.</p>
+<pre><code class="lang-r">findOverlaps(pk1.gr,cpgi.gr)
+</code></pre>
+<pre><code>## Hits of length 45
+## queryLength: 620
+## subjectLength: 205
+##     queryHits subjectHits 
+##      &lt;integer&gt;   &lt;integer&gt; 
+##  1         123           1 
+##  2         154           3 
+##  3         389           8 
+##  4         401          13 
+##  5         415          16 
+##  ...       ...         ... 
+##  41        595         155 
+##  42        598         166 
+##  43        600         176 
+##  44        611         192 
+##  45        613         200
+</code></pre><p>Another interesting thing would be to look at the distances to nearest CpG islands for each peak. In addition, just finding the nearest CpG island could also be interesting. Often times, you will need to find nearest TSS or gene to your regions of interest, and the code below is handy for doing that.</p>
+<pre><code class="lang-r"><span class="hljs-comment"># find nearest CpGi to each TSS</span>
+n.ind=nearest(pk1.gr,cpgi.gr)
+<span class="hljs-comment"># get distance to nearest</span>
+dists=distanceToNearest(pk1.gr,cpgi.gr,select=<span class="hljs-string">"arbitrary"</span>)
+dists
+</code></pre>
+<pre><code>## Hits of length 620
+## queryLength: 620
+## subjectLength: 205
+##     queryHits subjectHits  distance 
+##      &lt;integer&gt;   &lt;integer&gt; &lt;integer&gt; 
+##  1           1           1    384188 
+##  2           2           1    382968 
+##  3           3           1    381052 
+##  4           4           1    379311 
+##  5           5           1    376978 
+##  ...       ...         ...       ... 
+##  616       616         205     26211 
+##  617       617         205     27401 
+##  618       618         205     30467 
+##  619       619         205     31610 
+##  620       620         205     34089
+</code></pre><pre><code class="lang-r"><span class="hljs-comment"># histogram of the distances to nearest TSS</span>
+dist2plot=mcols(dists)[,<span class="hljs-number">1</span>]
+hist(log10(dist2plot),xlab=<span class="hljs-string">"log10(dist to nearest TSS)"</span>,
+     main=<span class="hljs-string">"Distances"</span>)
+</code></pre>
+<p><img src="figure/findNearest.png" alt="plot of chunk findNearest"> </p>
+
+                    
+                    </section>
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../genomic_intervals/README.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../genomic_intervals/htseq.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+        <script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/mode-javascript.js"></script>
+        <script src="../gitbook/jsrepl/jsrepl.js" id="jsrepl-script"></script>
+        <script src="../gitbook/app.js"></script>
+        
+    </body>
+</html>

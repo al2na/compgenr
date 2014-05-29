@@ -1,0 +1,487 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
+        
+        <meta charset="UTF-8">
+        <title>Data structures and  types | Notes on Computational Genomics with R</title>
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="robots" content="index, follow">
+        <meta name="author" content="al2na">
+        <meta name="description" content="This is somewhat an opinionated guide on using R for computational genomics. It is aimed at wet-lab researchers who wants to use R in their data analysis ,and bioinformaticians who are new to R and wants to learn more about its capabilities for genomics data analysis.">
+        <meta name="keywords" content="gitbook,github" >
+        <meta name="generator" content="www.gitbook.io">
+
+        
+        <link rel="next" href="../intro_to_r/reading_and_writing_data.html" />
+        
+        
+        <link rel="prev" href="../intro_to_r/computations_in_r.html" />
+        
+
+        <meta property="og:title" content="Data structures and  types | Notes on Computational Genomics with R">
+        <meta property="og:site_name" content="Notes on Computational Genomics with R">
+        <meta property="og:type" content="book">
+        <meta property="og:locale" content="en_US">
+
+        <meta property="book:author" content="https://github.com/al2na">
+        <meta property="book:tag" content="GitBook">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    </head>
+    <body>
+        
+        <link rel="stylesheet" href="../gitbook/style.css">
+        
+        
+    <div class="book" data-github="al2na/compgenr" data-level="2.3" data-basepath=".." data-revision="1401401823619">
+    <div class="book-header">
+    <!-- Actions Left -->
+    
+    <a href="https://github.com/al2na/compgenr" target="_blank" class="btn pull-left"><i class="fa fa-github-alt"></i></a>
+    
+    <a href="#" class="btn pull-left toggle-summary"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search"><i class="fa fa-search"></i></a>
+
+    <!-- Actions Right -->
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="google-plus"><i class="fa fa-google-plus"></i></a>
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="facebook"><i class="fa fa-facebook"></i></a>
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="twitter"><i class="fa fa-twitter"></i></a>
+
+    
+    <a href="https://github.com/al2na/compgenr/stargazers" target="_blank" class="btn pull-right count-star"><i class="fa fa-star-o"></i> Star (<span>-</span>)</a>
+    <a href="https://github.com/al2na/compgenr/watchers" target="_blank" class="btn pull-right count-watch"><i class="fa fa-eye"></i> Watch (<span>-</span>)</a>
+    
+
+    <!-- Title -->
+    <h1><a href="../" >Notes on Computational Genomics with R</a></h1>
+</div>
+
+    <div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        <li>
+            <a href="https://github.com/al2na" target="blank">About the author</a>
+        </li>
+        <li>
+            <a href="https://github.com/al2na/compgenr/issues" target="blank">Questions and Issues</a>
+        </li>
+        <li>
+            <a href="https://github.com/al2na/compgenr/edit/master/intro_to_r/data_types.md" target="blank">Edit and Contribute</a>
+        </li>
+        <li class="divider"></li>
+        
+        <li data-level="0" data-path="index.html">
+            <a href="../index.html"><i class="fa fa-check"></i> Introduction</a>
+        </li>
+        
+            <li  data-level="1" data-path="compgenr/README.html">
+                
+                <a href="../compgenr/README.html">
+                    <i class="fa fa-check"></i> <b>1.</b> Computational Genomics and R
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="1.1" data-path="compgenr/what_can_you_do_with_r.html">
+                            
+                            <a href="../compgenr/what_can_you_do_with_r.html">
+                                <i class="fa fa-check"></i> <b>1.1.</b> What can you do with R ?
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="2" data-path="intro_to_r/README.html">
+                
+                <a href="../intro_to_r/README.html">
+                    <i class="fa fa-check"></i> <b>2.</b> Quick Introduction to R
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="2.1" data-path="intro_to_r/the_setup.html">
+                            
+                            <a href="../intro_to_r/the_setup.html">
+                                <i class="fa fa-check"></i> <b>2.1.</b> The Setup
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.2" data-path="intro_to_r/computations_in_r.html">
+                            
+                            <a href="../intro_to_r/computations_in_r.html">
+                                <i class="fa fa-check"></i> <b>2.2.</b> Computations in R
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.3" data-path="intro_to_r/data_types.html">
+                            
+                            <a href="../intro_to_r/data_types.html">
+                                <i class="fa fa-check"></i> <b>2.3.</b> Data structures and  types
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.4" data-path="intro_to_r/reading_and_writing_data.html">
+                            
+                            <a href="../intro_to_r/reading_and_writing_data.html">
+                                <i class="fa fa-check"></i> <b>2.4.</b> Reading and writing data
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.5" data-path="intro_to_r/plotting_in_r.html">
+                            
+                            <a href="../intro_to_r/plotting_in_r.html">
+                                <i class="fa fa-check"></i> <b>2.5.</b> Plotting in R
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.6" data-path="intro_to_r/functions_and_control_structures_for,_ifelse_etc.html">
+                            
+                            <a href="../intro_to_r/functions_and_control_structures_for,_ifelse_etc.html">
+                                <i class="fa fa-check"></i> <b>2.6.</b> Functions and control structures (for, if/else etc.) 
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="3" data-path="genomic_intervals/README.html">
+                
+                <a href="../genomic_intervals/README.html">
+                    <i class="fa fa-check"></i> <b>3.</b> Genomic Intervals
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="3.1" data-path="genomic_intervals/granges.html">
+                            
+                            <a href="../genomic_intervals/granges.html">
+                                <i class="fa fa-check"></i> <b>3.1.</b> Operations on Genomic Intervals with GenomicRanges package
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="3.2" data-path="genomic_intervals/htseq.html">
+                            
+                            <a href="../genomic_intervals/htseq.html">
+                                <i class="fa fa-check"></i> <b>3.2.</b> Dealing with high-throughput sequencing reads
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="3.3" data-path="genomic_intervals/scores.html">
+                            
+                            <a href="../genomic_intervals/scores.html">
+                                <i class="fa fa-check"></i> <b>3.3.</b> Dealing with contiguous scores over the genome
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="4" data-path="sequence_analysis/README.html">
+                
+                <a href="../sequence_analysis/README.html">
+                    <i class="fa fa-check"></i> <b>4.</b> Sequence analysis
+                </a>
+                
+                
+            </li>
+        
+            <li  data-level="5" data-path="visualization/README.html">
+                
+                <a href="../visualization/README.html">
+                    <i class="fa fa-check"></i> <b>5.</b> Visualization
+                </a>
+                
+                
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="page-wrapper" tabindex="-1">
+                <div class="book-progress">
+    <div class="bar">
+        <div class="inner" style="width: 40%;min-width: 33.333333333333336%;"></div>
+    </div>
+    <div class="chapters">
+    
+        <a href="../index.html" title="Introduction" class="chapter done new-chapter" data-progress="0" style="left: 0%;"></a>
+    
+        <a href="../compgenr/README.html" title="Computational Genomics and R" class="chapter done new-chapter" data-progress="1" style="left: 6.666666666666667%;"></a>
+    
+        <a href="../compgenr/what_can_you_do_with_r.html" title="What can you do with R ?" class="chapter done " data-progress="1.1" style="left: 13.333333333333334%;"></a>
+    
+        <a href="../intro_to_r/README.html" title="Quick Introduction to R" class="chapter done new-chapter" data-progress="2" style="left: 20%;"></a>
+    
+        <a href="../intro_to_r/the_setup.html" title="The Setup" class="chapter done " data-progress="2.1" style="left: 26.666666666666668%;"></a>
+    
+        <a href="../intro_to_r/computations_in_r.html" title="Computations in R" class="chapter done " data-progress="2.2" style="left: 33.333333333333336%;"></a>
+    
+        <a href="../intro_to_r/data_types.html" title="Data structures and  types" class="chapter done " data-progress="2.3" style="left: 40%;"></a>
+    
+        <a href="../intro_to_r/reading_and_writing_data.html" title="Reading and writing data" class="chapter  " data-progress="2.4" style="left: 46.666666666666664%;"></a>
+    
+        <a href="../intro_to_r/plotting_in_r.html" title="Plotting in R" class="chapter  " data-progress="2.5" style="left: 53.333333333333336%;"></a>
+    
+        <a href="../intro_to_r/functions_and_control_structures_for,_ifelse_etc.html" title="Functions and control structures (for, if/else etc.) " class="chapter  " data-progress="2.6" style="left: 60%;"></a>
+    
+        <a href="../genomic_intervals/README.html" title="Genomic Intervals" class="chapter  new-chapter" data-progress="3" style="left: 66.66666666666667%;"></a>
+    
+        <a href="../genomic_intervals/granges.html" title="Operations on Genomic Intervals with GenomicRanges package" class="chapter  " data-progress="3.1" style="left: 73.33333333333333%;"></a>
+    
+        <a href="../genomic_intervals/htseq.html" title="Dealing with high-throughput sequencing reads" class="chapter  " data-progress="3.2" style="left: 80%;"></a>
+    
+        <a href="../genomic_intervals/scores.html" title="Dealing with contiguous scores over the genome" class="chapter  " data-progress="3.3" style="left: 86.66666666666667%;"></a>
+    
+        <a href="../sequence_analysis/README.html" title="Sequence analysis" class="chapter  new-chapter" data-progress="4" style="left: 93.33333333333333%;"></a>
+    
+        <a href="../visualization/README.html" title="Visualization" class="chapter  new-chapter" data-progress="5" style="left: 100%;"></a>
+    
+    </div>
+</div>
+
+                <div class="page-inner">
+                
+                    <section class="normal" id="section-gitbook_9">
+                    
+                        <h1 id="data-structures">Data structures</h1>
+<p>R has multiple data structures. If you are familiar with excel you can think of data structures as building blocks of a table and the table it self, a table is similar to a sheet in excel. Most of the time you will deal with tabular data sets, you will manipulate them, take sub-sections of them. It is good to know what are the common data structures in R and how they can be used.</p>
+<h2 id="vectors">Vectors</h2>
+<p>Vectors are one the core R data structures. It is basically a list of elements of the same type (numeric,character or logical). Later you will see that every column of a table will be represented as a vector. R handles vectors easily and intuitively. You can create vectors with c() function, however that is not the only way. The operations on vectors will propagate to all the elements of the vectors.</p>
+<pre><code class="lang-r">x &lt;- c(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">10</span>, <span class="hljs-number">5</span>)  <span class="hljs-comment">#create a vector x with 5 components</span>
+x
+</code></pre>
+<pre><code>## [1]  1  3  2 10  5
+</code></pre><pre><code class="lang-r">y &lt;- <span class="hljs-number">1</span>:<span class="hljs-number">5</span>  <span class="hljs-comment">#create a vector of consecutive integers y</span>
+y + <span class="hljs-number">2</span>  <span class="hljs-comment">#scalar addition</span>
+</code></pre>
+<pre><code>## [1] 3 4 5 6 7
+</code></pre><pre><code class="lang-r"><span class="hljs-number">2</span> * y  <span class="hljs-comment">#scalar multiplication</span>
+</code></pre>
+<pre><code>## [1]  2  4  6  8 10
+</code></pre><pre><code class="lang-r">y^<span class="hljs-number">2</span>  <span class="hljs-comment">#raise each component to the second power</span>
+</code></pre>
+<pre><code>## [1]  1  4  9 16 25
+</code></pre><pre><code class="lang-r"><span class="hljs-number">2</span>^y  <span class="hljs-comment">#raise 2 to the first through fifth power</span>
+</code></pre>
+<pre><code>## [1]  2  4  8 16 32
+</code></pre><pre><code class="lang-r">y  <span class="hljs-comment">#y itself has not been unchanged</span>
+</code></pre>
+<pre><code>## [1] 1 2 3 4 5
+</code></pre><pre><code class="lang-r">y &lt;- y * <span class="hljs-number">2</span>
+y  <span class="hljs-comment">#it is now changed</span>
+</code></pre>
+<pre><code>## [1]  2  4  6  8 10
+</code></pre><pre><code class="lang-r">r1 &lt;- rep(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>)  <span class="hljs-comment"># create a vector of 1s, length 3</span>
+length(r1)  <span class="hljs-comment">#length of the vector</span>
+</code></pre>
+<pre><code>## [1] 3
+</code></pre><pre><code class="lang-r">class(r1)  <span class="hljs-comment"># class of the vector</span>
+</code></pre>
+<pre><code>## [1] &quot;numeric&quot;
+</code></pre><pre><code class="lang-r">a &lt;- <span class="hljs-number">1</span>  <span class="hljs-comment"># this is actually a vector length one</span>
+</code></pre>
+<h2 id="matrices">Matrices</h2>
+<p>A matrix refers to a numeric array of rows and columns. You can think of it as a stacked version of vectors where each row or column is a vector. One of the easiest ways to create a matrix is to combine vectors of equal length using <em>cbind()</em>, meaning &#39;column bind&#39;.</p>
+<pre><code class="lang-r">x &lt;- c(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)
+y &lt;- c(<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>)
+m1 &lt;- cbind(x, y)
+m1
+</code></pre>
+<pre><code>##      x y
+## [1,] 1 4
+## [2,] 2 5
+## [3,] 3 6
+## [4,] 4 7
+</code></pre><pre><code class="lang-r">t(m1)  <span class="hljs-comment"># transpose of m1</span>
+</code></pre>
+<pre><code>##   [,1] [,2] [,3] [,4]
+## x    1    2    3    4
+## y    4    5    6    7
+</code></pre><pre><code class="lang-r">dim(m1)  <span class="hljs-comment"># 2 by 5 matrix</span>
+</code></pre>
+<pre><code>## [1] 4 2
+</code></pre><p>You can also directly list the elements and specify the matrix:</p>
+<pre><code class="lang-r">m2 &lt;- matrix(c(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">9</span>), nrow = <span class="hljs-number">3</span>)
+m2
+</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    5    2
+## [2,]    3   -1    3
+## [3,]    2    2    9
+</code></pre><p>Matrices and the next data structure <strong>data frames</strong> are tabular data structures. You can subset them using <strong>[]</strong> and providing desired rows and columns to subset. Here is how that works conceptually:
+<img src="../nonR_figures/slicingDataFrames.png" alt="alt text" title="slicing/subsetting">
+<em>slicing/subsetting of a matrix and data frame</em>.There are additional ways to subset data frames, see the next section.</p>
+<h2 id="data-frames">Data Frames</h2>
+<p>A data frame is more general than a matrix, in that different columns can have different modes (numeric, character, factor, etc.). A data frame can be constructed by data.frame() function. For example, we illustrate how to construct a data frame from genomic intervals or coordinates.</p>
+<pre><code class="lang-r">chr &lt;- c(<span class="hljs-string">"chr1"</span>, <span class="hljs-string">"chr1"</span>, <span class="hljs-string">"chr2"</span>, <span class="hljs-string">"chr2"</span>)
+strand &lt;- c(<span class="hljs-string">"-"</span>, <span class="hljs-string">"-"</span>, <span class="hljs-string">"+"</span>, <span class="hljs-string">"+"</span>)
+start &lt;- c(<span class="hljs-number">200</span>, <span class="hljs-number">4000</span>, <span class="hljs-number">100</span>, <span class="hljs-number">400</span>)
+end &lt;- c(<span class="hljs-number">250</span>, <span class="hljs-number">410</span>, <span class="hljs-number">200</span>, <span class="hljs-number">450</span>)
+mydata &lt;- data.frame(chr, start, end, strand)
+<span class="hljs-comment"># change column names</span>
+names(mydata) &lt;- c(<span class="hljs-string">"chr"</span>, <span class="hljs-string">"start"</span>, <span class="hljs-string">"end"</span>, <span class="hljs-string">"strand"</span>)
+mydata  <span class="hljs-comment"># OR this will work too</span>
+</code></pre>
+<pre><code>##    chr start end strand
+## 1 chr1   200 250      -
+## 2 chr1  4000 410      -
+## 3 chr2   100 200      +
+## 4 chr2   400 450      +
+</code></pre><pre><code class="lang-r">mydata &lt;- data.frame(chr = chr, start = start, end = end, strand = strand)
+mydata
+</code></pre>
+<pre><code>##    chr start end strand
+## 1 chr1   200 250      -
+## 2 chr1  4000 410      -
+## 3 chr2   100 200      +
+## 4 chr2   400 450      +
+</code></pre><p>There are a variety of ways to extract the elements of a data frame. You can extract certain columns using column numbers or names, or you can extract certain rows by using row numbers. You can also extract data using logical arguments, such as extracting all rows that has a value in a column larger than your threshold.</p>
+<pre><code class="lang-r">mydata[, <span class="hljs-number">2</span>:<span class="hljs-number">4</span>]  <span class="hljs-comment"># columns 2,3,4 of data frame</span>
+</code></pre>
+<pre><code>##   start end strand
+## 1   200 250      -
+## 2  4000 410      -
+## 3   100 200      +
+## 4   400 450      +
+</code></pre><pre><code class="lang-r">mydata[, c(<span class="hljs-string">"chr"</span>, <span class="hljs-string">"start"</span>)]  <span class="hljs-comment"># columns chr and start from data frame</span>
+</code></pre>
+<pre><code>##    chr start
+## 1 chr1   200
+## 2 chr1  4000
+## 3 chr2   100
+## 4 chr2   400
+</code></pre><pre><code class="lang-r">mydata$start  <span class="hljs-comment"># variable start in the data frame</span>
+</code></pre>
+<pre><code>## [1]  200 4000  100  400
+</code></pre><pre><code class="lang-r">mydata[c(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>), ]  <span class="hljs-comment"># get 1st and 3rd rows</span>
+</code></pre>
+<pre><code>##    chr start end strand
+## 1 chr1   200 250      -
+## 3 chr2   100 200      +
+</code></pre><pre><code class="lang-r">mydata[mydata$start &gt; <span class="hljs-number">400</span>, ]  <span class="hljs-comment"># get all rows where start&gt;400</span>
+</code></pre>
+<pre><code>##    chr start end strand
+## 2 chr1  4000 410      -
+</code></pre><h2 id="lists">Lists</h2>
+<p>An ordered collection of objects (components). A list allows you to gather a variety of (possibly unrelated) objects under one name.</p>
+<pre><code class="lang-r"><span class="hljs-comment"># example of a list with 4 components a string, a numeric vector, a matrix,</span>
+<span class="hljs-comment"># and a scalar</span>
+w &lt;- list(name = <span class="hljs-string">"Fred"</span>, mynumbers = c(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>), mymatrix = matrix(<span class="hljs-number">1</span>:<span class="hljs-number">4</span>, ncol = <span class="hljs-number">2</span>), 
+    age = <span class="hljs-number">5.3</span>)
+w
+</code></pre>
+<pre><code>## $name
+## [1] &quot;Fred&quot;
+## 
+## $mynumbers
+## [1] 1 2 3
+## 
+## $mymatrix
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+## 
+## $age
+## [1] 5.3
+</code></pre><p>You can extract elements of a list using the <strong>[[]]</strong> convention using either its position in the list or its name.</p>
+<pre><code class="lang-r">w[[<span class="hljs-number">3</span>]]  <span class="hljs-comment"># 3rd component of the list</span>
+</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+</code></pre><pre><code class="lang-r">w[[<span class="hljs-string">"mynumbers"</span>]]  <span class="hljs-comment"># component named mynumbers in list</span>
+</code></pre>
+<pre><code>## [1] 1 2 3
+</code></pre><pre><code class="lang-r">w$age
+</code></pre>
+<pre><code>## [1] 5.3
+</code></pre><h2 id="factors">Factors</h2>
+<p>Factors are used to store categorical data. They are important for statistical modeling since categorical variables are treated differently in statistical models than continuos variables. This ensures categorical data treated accordingly in statistical models.</p>
+<pre><code class="lang-r">features = c(<span class="hljs-string">"promoter"</span>, <span class="hljs-string">"exon"</span>, <span class="hljs-string">"intron"</span>)
+f.feat = factor(features)
+</code></pre>
+<p>Important thing to note is that when you are reading a data.frame with read.table() or creating a data frame with <strong>data.frame()</strong> character columns are stored as factors by default, to change this behaviour you need to set <strong>stringsAsFactors=FALSE</strong> in <strong>read.table()</strong> and/or <strong>data.frame()</strong> function arguments.</p>
+<h1 id="data-types">Data types</h1>
+<p>There are four comon data types in R, they are <strong>numeric</strong>, <strong>logical</strong>, <strong>character</strong> and <strong>integer</strong>. All these data types can be used to create vectors natively.</p>
+<pre><code class="lang-r"><span class="hljs-comment"># create a numeric vector x with 5 components</span>
+x &lt;- c(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">10</span>, <span class="hljs-number">5</span>)
+x
+</code></pre>
+<pre><code>## [1]  1  3  2 10  5
+</code></pre><pre><code class="lang-r"><span class="hljs-comment"># create a logical vector x</span>
+x &lt;- c(<span class="hljs-literal">TRUE</span>, <span class="hljs-literal">FALSE</span>, <span class="hljs-literal">TRUE</span>)
+x
+</code></pre>
+<pre><code>## [1]  TRUE FALSE  TRUE
+</code></pre><pre><code class="lang-r"><span class="hljs-comment"># create a character vector</span>
+x &lt;- c(<span class="hljs-string">"sds"</span>, <span class="hljs-string">"sd"</span>, <span class="hljs-string">"as"</span>)
+x
+</code></pre>
+<pre><code>## [1] &quot;sds&quot; &quot;sd&quot;  &quot;as&quot;
+</code></pre><pre><code class="lang-r">class(x)
+</code></pre>
+<pre><code>## [1] &quot;character&quot;
+</code></pre><pre><code class="lang-r"><span class="hljs-comment"># create an integer vector</span>
+x &lt;- c(<span class="hljs-number">1L</span>, <span class="hljs-number">2L</span>, <span class="hljs-number">3L</span>)
+x
+</code></pre>
+<pre><code>## [1] 1 2 3
+</code></pre><pre><code class="lang-r">class(x)
+</code></pre>
+<pre><code>## [1] &quot;integer&quot;
+</code></pre>
+                    
+                    </section>
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../intro_to_r/computations_in_r.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../intro_to_r/reading_and_writing_data.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+        <script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/mode-javascript.js"></script>
+        <script src="../gitbook/jsrepl/jsrepl.js" id="jsrepl-script"></script>
+        <script src="../gitbook/app.js"></script>
+        
+    </body>
+</html>

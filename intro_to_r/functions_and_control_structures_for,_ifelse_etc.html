@@ -1,0 +1,432 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
+        
+        <meta charset="UTF-8">
+        <title>Functions and control structures (for, if/else etc.)  | Notes on Computational Genomics with R</title>
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="robots" content="index, follow">
+        <meta name="author" content="al2na">
+        <meta name="description" content="This is somewhat an opinionated guide on using R for computational genomics. It is aimed at wet-lab researchers who wants to use R in their data analysis ,and bioinformaticians who are new to R and wants to learn more about its capabilities for genomics data analysis.">
+        <meta name="keywords" content="gitbook,github" >
+        <meta name="generator" content="www.gitbook.io">
+
+        
+        <link rel="next" href="../genomic_intervals/README.html" />
+        
+        
+        <link rel="prev" href="../intro_to_r/plotting_in_r.html" />
+        
+
+        <meta property="og:title" content="Functions and control structures (for, if/else etc.)  | Notes on Computational Genomics with R">
+        <meta property="og:site_name" content="Notes on Computational Genomics with R">
+        <meta property="og:type" content="book">
+        <meta property="og:locale" content="en_US">
+
+        <meta property="book:author" content="https://github.com/al2na">
+        <meta property="book:tag" content="GitBook">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    </head>
+    <body>
+        
+        <link rel="stylesheet" href="../gitbook/style.css">
+        
+        
+    <div class="book" data-github="al2na/compgenr" data-level="2.6" data-basepath=".." data-revision="1401401823619">
+    <div class="book-header">
+    <!-- Actions Left -->
+    
+    <a href="https://github.com/al2na/compgenr" target="_blank" class="btn pull-left"><i class="fa fa-github-alt"></i></a>
+    
+    <a href="#" class="btn pull-left toggle-summary"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search"><i class="fa fa-search"></i></a>
+
+    <!-- Actions Right -->
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="google-plus"><i class="fa fa-google-plus"></i></a>
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="facebook"><i class="fa fa-facebook"></i></a>
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="twitter"><i class="fa fa-twitter"></i></a>
+
+    
+    <a href="https://github.com/al2na/compgenr/stargazers" target="_blank" class="btn pull-right count-star"><i class="fa fa-star-o"></i> Star (<span>-</span>)</a>
+    <a href="https://github.com/al2na/compgenr/watchers" target="_blank" class="btn pull-right count-watch"><i class="fa fa-eye"></i> Watch (<span>-</span>)</a>
+    
+
+    <!-- Title -->
+    <h1><a href="../" >Notes on Computational Genomics with R</a></h1>
+</div>
+
+    <div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        <li>
+            <a href="https://github.com/al2na" target="blank">About the author</a>
+        </li>
+        <li>
+            <a href="https://github.com/al2na/compgenr/issues" target="blank">Questions and Issues</a>
+        </li>
+        <li>
+            <a href="https://github.com/al2na/compgenr/edit/master/intro_to_r/functions_and_control_structures_for,_ifelse_etc.md" target="blank">Edit and Contribute</a>
+        </li>
+        <li class="divider"></li>
+        
+        <li data-level="0" data-path="index.html">
+            <a href="../index.html"><i class="fa fa-check"></i> Introduction</a>
+        </li>
+        
+            <li  data-level="1" data-path="compgenr/README.html">
+                
+                <a href="../compgenr/README.html">
+                    <i class="fa fa-check"></i> <b>1.</b> Computational Genomics and R
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="1.1" data-path="compgenr/what_can_you_do_with_r.html">
+                            
+                            <a href="../compgenr/what_can_you_do_with_r.html">
+                                <i class="fa fa-check"></i> <b>1.1.</b> What can you do with R ?
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="2" data-path="intro_to_r/README.html">
+                
+                <a href="../intro_to_r/README.html">
+                    <i class="fa fa-check"></i> <b>2.</b> Quick Introduction to R
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="2.1" data-path="intro_to_r/the_setup.html">
+                            
+                            <a href="../intro_to_r/the_setup.html">
+                                <i class="fa fa-check"></i> <b>2.1.</b> The Setup
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.2" data-path="intro_to_r/computations_in_r.html">
+                            
+                            <a href="../intro_to_r/computations_in_r.html">
+                                <i class="fa fa-check"></i> <b>2.2.</b> Computations in R
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.3" data-path="intro_to_r/data_types.html">
+                            
+                            <a href="../intro_to_r/data_types.html">
+                                <i class="fa fa-check"></i> <b>2.3.</b> Data structures and  types
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.4" data-path="intro_to_r/reading_and_writing_data.html">
+                            
+                            <a href="../intro_to_r/reading_and_writing_data.html">
+                                <i class="fa fa-check"></i> <b>2.4.</b> Reading and writing data
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.5" data-path="intro_to_r/plotting_in_r.html">
+                            
+                            <a href="../intro_to_r/plotting_in_r.html">
+                                <i class="fa fa-check"></i> <b>2.5.</b> Plotting in R
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.6" data-path="intro_to_r/functions_and_control_structures_for,_ifelse_etc.html">
+                            
+                            <a href="../intro_to_r/functions_and_control_structures_for,_ifelse_etc.html">
+                                <i class="fa fa-check"></i> <b>2.6.</b> Functions and control structures (for, if/else etc.) 
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="3" data-path="genomic_intervals/README.html">
+                
+                <a href="../genomic_intervals/README.html">
+                    <i class="fa fa-check"></i> <b>3.</b> Genomic Intervals
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="3.1" data-path="genomic_intervals/granges.html">
+                            
+                            <a href="../genomic_intervals/granges.html">
+                                <i class="fa fa-check"></i> <b>3.1.</b> Operations on Genomic Intervals with GenomicRanges package
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="3.2" data-path="genomic_intervals/htseq.html">
+                            
+                            <a href="../genomic_intervals/htseq.html">
+                                <i class="fa fa-check"></i> <b>3.2.</b> Dealing with high-throughput sequencing reads
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="3.3" data-path="genomic_intervals/scores.html">
+                            
+                            <a href="../genomic_intervals/scores.html">
+                                <i class="fa fa-check"></i> <b>3.3.</b> Dealing with contiguous scores over the genome
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="4" data-path="sequence_analysis/README.html">
+                
+                <a href="../sequence_analysis/README.html">
+                    <i class="fa fa-check"></i> <b>4.</b> Sequence analysis
+                </a>
+                
+                
+            </li>
+        
+            <li  data-level="5" data-path="visualization/README.html">
+                
+                <a href="../visualization/README.html">
+                    <i class="fa fa-check"></i> <b>5.</b> Visualization
+                </a>
+                
+                
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="page-wrapper" tabindex="-1">
+                <div class="book-progress">
+    <div class="bar">
+        <div class="inner" style="width: 60%;min-width: 53.333333333333336%;"></div>
+    </div>
+    <div class="chapters">
+    
+        <a href="../index.html" title="Introduction" class="chapter done new-chapter" data-progress="0" style="left: 0%;"></a>
+    
+        <a href="../compgenr/README.html" title="Computational Genomics and R" class="chapter done new-chapter" data-progress="1" style="left: 6.666666666666667%;"></a>
+    
+        <a href="../compgenr/what_can_you_do_with_r.html" title="What can you do with R ?" class="chapter done " data-progress="1.1" style="left: 13.333333333333334%;"></a>
+    
+        <a href="../intro_to_r/README.html" title="Quick Introduction to R" class="chapter done new-chapter" data-progress="2" style="left: 20%;"></a>
+    
+        <a href="../intro_to_r/the_setup.html" title="The Setup" class="chapter done " data-progress="2.1" style="left: 26.666666666666668%;"></a>
+    
+        <a href="../intro_to_r/computations_in_r.html" title="Computations in R" class="chapter done " data-progress="2.2" style="left: 33.333333333333336%;"></a>
+    
+        <a href="../intro_to_r/data_types.html" title="Data structures and  types" class="chapter done " data-progress="2.3" style="left: 40%;"></a>
+    
+        <a href="../intro_to_r/reading_and_writing_data.html" title="Reading and writing data" class="chapter done " data-progress="2.4" style="left: 46.666666666666664%;"></a>
+    
+        <a href="../intro_to_r/plotting_in_r.html" title="Plotting in R" class="chapter done " data-progress="2.5" style="left: 53.333333333333336%;"></a>
+    
+        <a href="../intro_to_r/functions_and_control_structures_for,_ifelse_etc.html" title="Functions and control structures (for, if/else etc.) " class="chapter done " data-progress="2.6" style="left: 60%;"></a>
+    
+        <a href="../genomic_intervals/README.html" title="Genomic Intervals" class="chapter  new-chapter" data-progress="3" style="left: 66.66666666666667%;"></a>
+    
+        <a href="../genomic_intervals/granges.html" title="Operations on Genomic Intervals with GenomicRanges package" class="chapter  " data-progress="3.1" style="left: 73.33333333333333%;"></a>
+    
+        <a href="../genomic_intervals/htseq.html" title="Dealing with high-throughput sequencing reads" class="chapter  " data-progress="3.2" style="left: 80%;"></a>
+    
+        <a href="../genomic_intervals/scores.html" title="Dealing with contiguous scores over the genome" class="chapter  " data-progress="3.3" style="left: 86.66666666666667%;"></a>
+    
+        <a href="../sequence_analysis/README.html" title="Sequence analysis" class="chapter  new-chapter" data-progress="4" style="left: 93.33333333333333%;"></a>
+    
+        <a href="../visualization/README.html" title="Visualization" class="chapter  new-chapter" data-progress="5" style="left: 100%;"></a>
+    
+    </div>
+</div>
+
+                <div class="page-inner">
+                
+                    <section class="normal" id="section-gitbook_11">
+                    
+                        <h1 id="functions-and-control-structures-for-if-else-etc-">Functions and control structures (for, if/else etc.)</h1>
+<h2 id="user-defined-functions">User defined functions</h2>
+<p>Functions are useful for transforming larger chunks of code to re- usable pieces of code. Generally, if you need to execute certain tasks with variable parameters then it is time you write a function. A func- tion in R takes different arguments and returns a definite output, much like mathematical functions. Here is a simple function takes two arguments, x and y, and returns the sum of their squares.</p>
+<pre><code class="lang-r">sqSum &lt;- <span class="hljs-keyword">function</span>(x, y) {
+    result = x^<span class="hljs-number">2</span> + y^<span class="hljs-number">2</span>
+    <span class="hljs-keyword">return</span>(result)
+}
+<span class="hljs-comment"># now try the function out</span>
+sqSum(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+</code></pre>
+<pre><code>## [1] 13
+</code></pre><p>Functions can also output plots and/or messages to the terminal. Here is a function that prints a message to the terminal:</p>
+<pre><code class="lang-r">sqSumPrint &lt;- <span class="hljs-keyword">function</span>(x, y) {
+    result = x^<span class="hljs-number">2</span> + y^<span class="hljs-number">2</span>
+    cat(<span class="hljs-string">"here is the result:"</span>, result, <span class="hljs-string">"\n"</span>)
+}
+<span class="hljs-comment"># now try the function out</span>
+sqSumPrint(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+</code></pre>
+<pre><code>## here is the result: 13
+</code></pre><p>Sometimes we would want to execute a certain part of the code only if certain condition is satisfied. This condition can be anything from the type of an object (Ex: if object is a matrix execute certain code), or it can be more compicated such as if object value is between certain thresholds. Let us see how they can be used3. They can be used anywhere in your code, now we will use it in a function.</p>
+<pre><code class="lang-r">cpgi.df &lt;- read.table(<span class="hljs-string">"../data/subset.cpgi.hg18.bed"</span>, header = <span class="hljs-literal">FALSE</span>)
+<span class="hljs-comment"># function takes input one row of CpGi data frame</span>
+largeCpGi &lt;- <span class="hljs-keyword">function</span>(bedRow) {
+    cpglen = bedRow[<span class="hljs-number">3</span>] - bedRow[<span class="hljs-number">2</span>] + <span class="hljs-number">1</span>
+    <span class="hljs-keyword">if</span> (cpglen &gt; <span class="hljs-number">1500</span>) {
+        cat(<span class="hljs-string">"this is large\n"</span>)
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cpglen &lt;= <span class="hljs-number">1500</span> &amp; cpglen &gt; <span class="hljs-number">700</span>) {
+        cat(<span class="hljs-string">"this is normal\n"</span>)
+    } <span class="hljs-keyword">else</span> {
+        cat(<span class="hljs-string">"this is short\n"</span>)
+    }
+}
+largeCpGi(cpgi.df[<span class="hljs-number">10</span>, ])
+largeCpGi(cpgi.df[<span class="hljs-number">100</span>, ])
+largeCpGi(cpgi.df[<span class="hljs-number">1000</span>, ])
+</code></pre>
+<h2 id="loops-and-looping-structures-in-r">Loops and looping structures in R</h2>
+<p>When you need to repeat a certain task or a execute a function multiple times, you can do that with the help of loops. A loop will execute the task until a certain condition is reached. The loop below is called a “for-loop” and it executes the task sequentially 10 times.</p>
+<pre><code class="lang-r"><span class="hljs-keyword">for</span> (i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:<span class="hljs-number">10</span>) {
+    <span class="hljs-comment"># number of repetitions</span>
+    cat(<span class="hljs-string">"This is iteration"</span>)  <span class="hljs-comment"># the task to be repeated</span>
+    print(i)
+}
+</code></pre>
+<pre><code>## This is iteration[1] 1
+## This is iteration[1] 2
+## This is iteration[1] 3
+## This is iteration[1] 4
+## This is iteration[1] 5
+## This is iteration[1] 6
+## This is iteration[1] 7
+## This is iteration[1] 8
+## This is iteration[1] 9
+## This is iteration[1] 10
+</code></pre><p>The task above is a bit pointless, normally in a loop, you would want to do something meaningful. Let us calculate the length of the CpG islands we read in earlier. Although this is not the most efficient way of doing that particular task, it serves as a good example for looping. The code below will be execute hundred times, and it will calculate the length of the CpG islands for the first 100 islands in
+the data frame (by subtracting the end coordinate from the start coordinate).</p>
+<p><strong>Note:</strong>If you are going to run a loop that has a lot of repetitions, it is smart to try the loop with few repetitions first and check the results. This will help you make sure the code in the loop works before executing it for thousands of times.</p>
+<pre><code class="lang-r"><span class="hljs-comment"># this is where we will keep the lenghts for now it is an empty vector</span>
+result = c()
+<span class="hljs-comment"># start the loop</span>
+<span class="hljs-keyword">for</span> (i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:<span class="hljs-number">100</span>) {
+    <span class="hljs-comment"># calculate the length</span>
+    len = cpgi.df[i, <span class="hljs-number">3</span>] - cpgi.df[i, <span class="hljs-number">2</span>] + <span class="hljs-number">1</span>
+    <span class="hljs-comment"># append the length to the result</span>
+    result = c(result, len)
+}
+</code></pre>
+<pre><code>## Error: object &#39;cpgi.df&#39; not found
+</code></pre><pre><code class="lang-r"><span class="hljs-comment"># check the results</span>
+head(result)
+</code></pre>
+<pre><code>## NULL
+</code></pre><h3 id="apply-family-functions-instead-of-loops">apply family functions instead of loops</h3>
+<p>R has other ways of repeating tasks that tend to be more efficient than using loops. They are known as the <strong>“apply”</strong> family of functions, which include <em>apply,lapply, mapply and tapply</em> (and some other variants). All of these functions apply a given function to a set of instances and returns the result of those functions for each instance. The differences between them is that they take different type of inputs. For example apply works on data frames or matrices and applies the function on each row or column of the data structure. <em>lapply</em> works on lists or vectors and applies a function which takes the list element as an argument. Next we will demonstrate how to use <strong>apply()</strong> on a matrix. The example applies the sum function on the rows of a matrix, it basically sums up the values on each row of the matrix, which is conceptualized in Figure below.</p>
+<p><img src="../nonR_figures/apply.png" alt="alt text" title="apply concept"></p>
+<pre><code class="lang-r">mat = cbind(c(<span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>), c(<span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), c(<span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>), c(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>), c(<span class="hljs-number">1</span>, 
+    <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>), c(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>))
+result &lt;- apply(mat, <span class="hljs-number">1</span>, sum)
+result
+</code></pre>
+<pre><code>## [1] 12  3  5  6
+</code></pre><pre><code class="lang-r"><span class="hljs-comment"># OR you can define the function as an argument to apply()</span>
+result &lt;- apply(mat, <span class="hljs-number">1</span>, <span class="hljs-keyword">function</span>(x) sum(x))
+result
+</code></pre>
+<pre><code>## [1] 12  3  5  6
+</code></pre><p>Notice that we used a second argument which equals to 1, that indicates that rows of the matrix/ data frame will be the input for the function. If we change the second argument to 2, this will indicate that columns should be the input for the function that will be applied. See Figure for the visualization of apply() on columns.</p>
+<p><img src="../nonR_figures/apply2.png" alt="alt text" title="apply on columns concept"></p>
+<pre><code class="lang-r">result &lt;- apply(mat, <span class="hljs-number">2</span>, sum)
+result
+</code></pre>
+<pre><code>## [1] 9 3 6 2 3 3
+</code></pre><p>Next, we will use <strong>lapply()</strong>, which applies a function on a list or a vector. The function that will be applied is a simple function that takes the square of a given number.</p>
+<pre><code class="lang-r">input = c(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)
+lapply(input, <span class="hljs-keyword">function</span>(x) x^<span class="hljs-number">2</span>)
+</code></pre>
+<pre><code>## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 4
+## 
+## [[3]]
+## [1] 9
+</code></pre><p><strong>mapply()</strong> is another member of apply family, it can apply a function on an unlimited set of vectors/lists, it is like a version of lapply that can handle multiple vectors as arguments. In this case, the argument to the mapply() is the function to be applied and the sets of parameters to be supplied as arguments of the function. This conceptualized Figure below, the function to be applied is a function that takes to arguments and sums them up. The arguments to be summed up are in the format of vectors, Xs and Ys. mapply() applies the summation function to each pair in Xs and Ys vector. Notice that the order of the input function and extra arguments are different for mapply.
+<img src="../nonR_figures/mapply.png" alt="alt text" title="mapply  concept"></p>
+<pre><code class="lang-r">Xs = <span class="hljs-number">0</span>:<span class="hljs-number">5</span>
+Ys = c(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>)
+result &lt;- mapply(<span class="hljs-keyword">function</span>(x, y) sum(x, y), Xs, Ys)
+result
+</code></pre>
+<pre><code>## [1] 2 3 4 6 7 8
+</code></pre><h3 id="apply-family-functions-on-multiple-cores">apply family functions on multiple cores</h3>
+<p>If you have large data sets apply family functions can be slow (although probably still better than for loops). If that is the case, you can easily use the parallel versions of those functions from parallel package. These functions essentially divide your tasks to smaller chunks run them on separate CPUs and merge the results from those parallel operations. This concept is visualized at Figure below , mcapply runs the summation function on three different processors. Each processor executes the summation function on a part of the data set, and the results are merged and returned as a single vector that has the same order as the input parameters Xs and Ys.
+<img src="../nonR_figures/mcmapply.png" alt="alt text" title="mcmapply  concept"></p>
+<h2 id="vectorized-functions-in-r">Vectorized Functions in R</h2>
+<p>The above examples have been put forward to illustrate functions and loops in R because functions using sum() are not complicated and easy to understand. You will probably need to use loops and looping structures with more complicated functions. In reality, most of the operations we used do not need the use of loops or looping structures because there are already vectorized functions that can achieve the same outcomes, meaning if the input arguments are R vectors the output will be a vector as well, so no need for loops or vectorization.</p>
+<p>For example, instead of using mapply() and sum() functions we can just use + operator and sum up Xs and Ys.</p>
+<pre><code class="lang-r">result = Xs + Ys
+result
+</code></pre>
+<pre><code>## [1] 2 3 4 6 7 8
+</code></pre><p>In order to get the column or row sums, we can use the vectorized functions colSums() and rowSums().</p>
+<pre><code class="lang-r">colSums(mat)
+</code></pre>
+<pre><code>## [1] 9 3 6 2 3 3
+</code></pre><pre><code class="lang-r">rowSums(mat)
+</code></pre>
+<pre><code>## [1] 12  3  5  6
+</code></pre><p>However, remember that not every function is vectorized in R, use the ones that are. But sooner or later, apply family functions will come in handy.</p>
+
+                    
+                    </section>
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../intro_to_r/plotting_in_r.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../genomic_intervals/README.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+        <script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/mode-javascript.js"></script>
+        <script src="../gitbook/jsrepl/jsrepl.js" id="jsrepl-script"></script>
+        <script src="../gitbook/app.js"></script>
+        
+    </body>
+</html>

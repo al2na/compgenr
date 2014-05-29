@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+    <head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">
+        
+        <meta charset="UTF-8">
+        <title>Computational Genomics and R | Notes on Computational Genomics with R</title>
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="robots" content="index, follow">
+        <meta name="author" content="al2na">
+        <meta name="description" content="This is somewhat an opinionated guide on using R for computational genomics. It is aimed at wet-lab researchers who wants to use R in their data analysis ,and bioinformaticians who are new to R and wants to learn more about its capabilities for genomics data analysis.">
+        <meta name="keywords" content="gitbook,github" >
+        <meta name="generator" content="www.gitbook.io">
+
+        
+        <link rel="next" href="../compgenr/what_can_you_do_with_r.html" />
+        
+        
+        <link rel="prev" href="../index.html" />
+        
+
+        <meta property="og:title" content="Computational Genomics and R | Notes on Computational Genomics with R">
+        <meta property="og:site_name" content="Notes on Computational Genomics with R">
+        <meta property="og:type" content="book">
+        <meta property="og:locale" content="en_US">
+
+        <meta property="book:author" content="https://github.com/al2na">
+        <meta property="book:tag" content="GitBook">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+        <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+        
+    </head>
+    <body>
+        
+        <link rel="stylesheet" href="../gitbook/style.css">
+        
+        
+    <div class="book" data-github="al2na/compgenr" data-level="1" data-basepath=".." data-revision="1401401823619">
+    <div class="book-header">
+    <!-- Actions Left -->
+    
+    <a href="https://github.com/al2na/compgenr" target="_blank" class="btn pull-left"><i class="fa fa-github-alt"></i></a>
+    
+    <a href="#" class="btn pull-left toggle-summary"><i class="fa fa-align-justify"></i></a>
+    <a href="#" class="btn pull-left toggle-search"><i class="fa fa-search"></i></a>
+
+    <!-- Actions Right -->
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="google-plus"><i class="fa fa-google-plus"></i></a>
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="facebook"><i class="fa fa-facebook"></i></a>
+    <a href="#" target="_blank" class="btn pull-right" data-sharing="twitter"><i class="fa fa-twitter"></i></a>
+
+    
+    <a href="https://github.com/al2na/compgenr/stargazers" target="_blank" class="btn pull-right count-star"><i class="fa fa-star-o"></i> Star (<span>-</span>)</a>
+    <a href="https://github.com/al2na/compgenr/watchers" target="_blank" class="btn pull-right count-watch"><i class="fa fa-eye"></i> Watch (<span>-</span>)</a>
+    
+
+    <!-- Title -->
+    <h1><a href="../" >Notes on Computational Genomics with R</a></h1>
+</div>
+
+    <div class="book-summary">
+    <div class="book-search">
+        <input type="text" placeholder="Search" class="form-control" />
+    </div>
+    <ul class="summary">
+        
+        <li>
+            <a href="https://github.com/al2na" target="blank">About the author</a>
+        </li>
+        <li>
+            <a href="https://github.com/al2na/compgenr/issues" target="blank">Questions and Issues</a>
+        </li>
+        <li>
+            <a href="https://github.com/al2na/compgenr/edit/master/compgenr/README.md" target="blank">Edit and Contribute</a>
+        </li>
+        <li class="divider"></li>
+        
+        <li data-level="0" data-path="index.html">
+            <a href="../index.html"><i class="fa fa-check"></i> Introduction</a>
+        </li>
+        
+            <li  data-level="1" data-path="compgenr/README.html">
+                
+                <a href="../compgenr/README.html">
+                    <i class="fa fa-check"></i> <b>1.</b> Computational Genomics and R
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="1.1" data-path="compgenr/what_can_you_do_with_r.html">
+                            
+                            <a href="../compgenr/what_can_you_do_with_r.html">
+                                <i class="fa fa-check"></i> <b>1.1.</b> What can you do with R ?
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="2" data-path="intro_to_r/README.html">
+                
+                <a href="../intro_to_r/README.html">
+                    <i class="fa fa-check"></i> <b>2.</b> Quick Introduction to R
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="2.1" data-path="intro_to_r/the_setup.html">
+                            
+                            <a href="../intro_to_r/the_setup.html">
+                                <i class="fa fa-check"></i> <b>2.1.</b> The Setup
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.2" data-path="intro_to_r/computations_in_r.html">
+                            
+                            <a href="../intro_to_r/computations_in_r.html">
+                                <i class="fa fa-check"></i> <b>2.2.</b> Computations in R
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.3" data-path="intro_to_r/data_types.html">
+                            
+                            <a href="../intro_to_r/data_types.html">
+                                <i class="fa fa-check"></i> <b>2.3.</b> Data structures and  types
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.4" data-path="intro_to_r/reading_and_writing_data.html">
+                            
+                            <a href="../intro_to_r/reading_and_writing_data.html">
+                                <i class="fa fa-check"></i> <b>2.4.</b> Reading and writing data
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.5" data-path="intro_to_r/plotting_in_r.html">
+                            
+                            <a href="../intro_to_r/plotting_in_r.html">
+                                <i class="fa fa-check"></i> <b>2.5.</b> Plotting in R
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="2.6" data-path="intro_to_r/functions_and_control_structures_for,_ifelse_etc.html">
+                            
+                            <a href="../intro_to_r/functions_and_control_structures_for,_ifelse_etc.html">
+                                <i class="fa fa-check"></i> <b>2.6.</b> Functions and control structures (for, if/else etc.) 
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="3" data-path="genomic_intervals/README.html">
+                
+                <a href="../genomic_intervals/README.html">
+                    <i class="fa fa-check"></i> <b>3.</b> Genomic Intervals
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="3.1" data-path="genomic_intervals/granges.html">
+                            
+                            <a href="../genomic_intervals/granges.html">
+                                <i class="fa fa-check"></i> <b>3.1.</b> Operations on Genomic Intervals with GenomicRanges package
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="3.2" data-path="genomic_intervals/htseq.html">
+                            
+                            <a href="../genomic_intervals/htseq.html">
+                                <i class="fa fa-check"></i> <b>3.2.</b> Dealing with high-throughput sequencing reads
+                            </a>
+                            
+                        </li>
+                    
+                        <li  data-level="3.3" data-path="genomic_intervals/scores.html">
+                            
+                            <a href="../genomic_intervals/scores.html">
+                                <i class="fa fa-check"></i> <b>3.3.</b> Dealing with contiguous scores over the genome
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
+            <li  data-level="4" data-path="sequence_analysis/README.html">
+                
+                <a href="../sequence_analysis/README.html">
+                    <i class="fa fa-check"></i> <b>4.</b> Sequence analysis
+                </a>
+                
+                
+            </li>
+        
+            <li  data-level="5" data-path="visualization/README.html">
+                
+                <a href="../visualization/README.html">
+                    <i class="fa fa-check"></i> <b>5.</b> Visualization
+                </a>
+                
+                
+            </li>
+        
+    </ul>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="page-wrapper" tabindex="-1">
+                <div class="book-progress">
+    <div class="bar">
+        <div class="inner" style="width: 6.666666666666667%;min-width: 0%;"></div>
+    </div>
+    <div class="chapters">
+    
+        <a href="../index.html" title="Introduction" class="chapter done new-chapter" data-progress="0" style="left: 0%;"></a>
+    
+        <a href="../compgenr/README.html" title="Computational Genomics and R" class="chapter done new-chapter" data-progress="1" style="left: 6.666666666666667%;"></a>
+    
+        <a href="../compgenr/what_can_you_do_with_r.html" title="What can you do with R ?" class="chapter  " data-progress="1.1" style="left: 13.333333333333334%;"></a>
+    
+        <a href="../intro_to_r/README.html" title="Quick Introduction to R" class="chapter  new-chapter" data-progress="2" style="left: 20%;"></a>
+    
+        <a href="../intro_to_r/the_setup.html" title="The Setup" class="chapter  " data-progress="2.1" style="left: 26.666666666666668%;"></a>
+    
+        <a href="../intro_to_r/computations_in_r.html" title="Computations in R" class="chapter  " data-progress="2.2" style="left: 33.333333333333336%;"></a>
+    
+        <a href="../intro_to_r/data_types.html" title="Data structures and  types" class="chapter  " data-progress="2.3" style="left: 40%;"></a>
+    
+        <a href="../intro_to_r/reading_and_writing_data.html" title="Reading and writing data" class="chapter  " data-progress="2.4" style="left: 46.666666666666664%;"></a>
+    
+        <a href="../intro_to_r/plotting_in_r.html" title="Plotting in R" class="chapter  " data-progress="2.5" style="left: 53.333333333333336%;"></a>
+    
+        <a href="../intro_to_r/functions_and_control_structures_for,_ifelse_etc.html" title="Functions and control structures (for, if/else etc.) " class="chapter  " data-progress="2.6" style="left: 60%;"></a>
+    
+        <a href="../genomic_intervals/README.html" title="Genomic Intervals" class="chapter  new-chapter" data-progress="3" style="left: 66.66666666666667%;"></a>
+    
+        <a href="../genomic_intervals/granges.html" title="Operations on Genomic Intervals with GenomicRanges package" class="chapter  " data-progress="3.1" style="left: 73.33333333333333%;"></a>
+    
+        <a href="../genomic_intervals/htseq.html" title="Dealing with high-throughput sequencing reads" class="chapter  " data-progress="3.2" style="left: 80%;"></a>
+    
+        <a href="../genomic_intervals/scores.html" title="Dealing with contiguous scores over the genome" class="chapter  " data-progress="3.3" style="left: 86.66666666666667%;"></a>
+    
+        <a href="../sequence_analysis/README.html" title="Sequence analysis" class="chapter  new-chapter" data-progress="4" style="left: 93.33333333333333%;"></a>
+    
+        <a href="../visualization/README.html" title="Visualization" class="chapter  new-chapter" data-progress="5" style="left: 100%;"></a>
+    
+    </div>
+</div>
+
+                <div class="page-inner">
+                
+                    <section class="normal" id="section-gitbook_2">
+                    
+                        <h1 id="computational-genomics-and-r">Computational Genomics and R</h1>
+<p>The aim of computational genomics is to do biological interpretation of high dimensional genomics data. Generally speaking, it is similar to any other kind of data analysis but often times doing computa- tional genomics will require domain specific knowledge and tools. The tasks of computational genomics can be roughly summarized below.</p>
+<p><img src="../nonR_figures/dataAnalysis.png" alt="asd"></p>
+<p>Most of the time, the analysis starts with the raw data (if you
+are somehow served with already processed data, consider yourself lucky). The raw data could be image files from a microarray, or text files from a sequencer. That means the analysis starts with processing the data to a manageable format. This processing includes data munging which is transforming the data from one format to another, data point transformations such as normalizing and log transformations, and filtering and removing data points with specific thresholds. For example. you may want to remove data points that have unreliable measurements or missing values. The next step is
+to apply supervised/unsupervised learning algorithms to test the hypothesis that lead to experiments that generated the data. This step also includes quality checks about your data.</p>
+<p>Another important thing to do is to annotate and visualize your data. For example, after finding transcription factor binding sites using data from ChIP-seq experiments, you would like to see what kind of genes they are nearby or what kind of other genomic features they overlap with. Do they overlap with promoters or they are distal? You may also like to see your binding sites on the genome or make a summary plot showing distances to nearest transcriptions start sites. All of this tasks
+can be classified as visualization and annotation tasks.</p>
+<p>All of these steps should hopefully lead you to the holy grail which is biological interpretation of the data and hopefully to some new insights about genome biology.</p>
+
+                    
+                    </section>
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="../index.html" class="navigation navigation-prev"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="../compgenr/what_can_you_do_with_r.html" class="navigation navigation-next"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+        <script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/mode-javascript.js"></script>
+        <script src="../gitbook/jsrepl/jsrepl.js" id="jsrepl-script"></script>
+        <script src="../gitbook/app.js"></script>
+        
+    </body>
+</html>
